@@ -35,6 +35,7 @@ public class TimerWin : MonoBehaviour
             LvlAfterUnlocked();
             noiceSoundPlayer.PlayOneShot(noiceSound);
             noiceSoundOnce = false;
+            GameObject.Find("Canvas").GetComponent<PauseMenuS>().enabled = false;
         }
     }
 

@@ -1528,7 +1528,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'CHOOSE YOUR '
+  m_Text: Drag to
 --- !u!222 &439902358
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2637,7 +2637,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: SAFE ZONE
+  m_Text: Safety
 --- !u!222 &809712978
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3299,7 +3299,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: SAFE ZONE
+  m_Text: Safety
 --- !u!222 &1007659517
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5480,7 +5480,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'CHOOSE YOUR '
+  m_Text: Drag to
 --- !u!222 &1659617311
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5916,7 +5916,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &1721330692
 MonoBehaviour:

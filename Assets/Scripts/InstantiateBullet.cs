@@ -56,6 +56,7 @@ public class InstantiateBullet : MonoBehaviour
             GameObject.Find("AudioM").GetComponent<AudioSource>().Stop();
             Destroy(GameObject.Find("ReflectionsCnt"));
             Destroy(GameObject.Find("CanonMvtSpeed"));
+            Destroy(GameObject.Find("LvlP"));
 
             Destroy(GameObject.Find("ShootB"));
         }
@@ -82,13 +83,14 @@ public class InstantiateBullet : MonoBehaviour
         GameObject.Find("AudioM").GetComponent<AudioSource>().Stop();
         Destroy(GameObject.Find("ReflectionsCnt"));
         Destroy(GameObject.Find("CanonMvtSpeed"));
+        Destroy(GameObject.Find("LvlP"));
 
         Destroy(GameObject.Find("ShootB"));
     }
 
     void DoSlowMo()
     {
-        Time.timeScale = 0.05f;
+        Time.timeScale = 0.03f;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
 }

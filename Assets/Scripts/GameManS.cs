@@ -10,8 +10,5 @@ public class GameManS : MonoBehaviour
         Invoke("RestartLvl", 1f);
     }
     
-    public void RestartLvl()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    public void RestartLvl() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 }

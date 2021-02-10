@@ -10,6 +10,8 @@ public class ButtonS : MonoBehaviour
     public Button restartB, lvlsB, exitB, refPrecisionL, refPrecisionR;
     public GameObject musicOnB, musicOffB, reflecionsWarning;
 
+    public bool stopTimer = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +77,8 @@ public class ButtonS : MonoBehaviour
             Time.timeScale = 1f;
             gameObject.AddComponent<GameManS>().RestartLvl();
         }
+
+        if (stopTimer == true) GameObject.Find("Timer").GetComponent<TimerWin>().enabled = false;
     }
 
     public void RestartGameByB()

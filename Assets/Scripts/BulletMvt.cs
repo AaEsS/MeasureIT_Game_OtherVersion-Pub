@@ -45,7 +45,7 @@ public class BulletMvt : MonoBehaviour
             foreach (GameObject bullet in bullets)
                 Destroy(bullet);
             GameObject.Find("GameMan").GetComponent<GameManS>().enabled = true;
-            GameObject.Find("Timer").GetComponent<TimerWin>().enabled = false;
+            GameObject.Find("Canvas").GetComponent<ButtonS>().stopTimer = true;
         }
     }
 
