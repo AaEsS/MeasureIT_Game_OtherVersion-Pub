@@ -8,12 +8,13 @@ public class TimerWin : MonoBehaviour
 {
     public Text timer;
     public float howMuchTime;
-    public GameObject nextLvl;
     AudioSource noiceSoundPlayer;
     public AudioClip noiceSound;
 
     bool noiceSoundOnce = true;
 
+    public Animator nextLvlAnims;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +32,7 @@ public class TimerWin : MonoBehaviour
         }
         else if (noiceSoundOnce == true)
         {
-            nextLvl.SetActive(true);
+            nextLvlAnims.SetTrigger("GoToNext");
             LvlAfterUnlocked();
             noiceSoundPlayer.PlayOneShot(noiceSound);
             noiceSoundOnce = false;

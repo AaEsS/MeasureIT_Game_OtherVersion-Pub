@@ -10,7 +10,7 @@ public class StartButtons : MonoBehaviour
 
     public void StartPlaying() => SceneManager.LoadScene("1");
     public void LoadLevels() => SceneManager.LoadScene("Lvls");
-    public void LoadCredits() => SceneManager.LoadScene("Credits");
+    public void LoadHowToplay() => SceneManager.LoadScene("HowToPlay");
     public void GTFO() => Application.Quit();
     int musicTracker;
 
@@ -21,7 +21,7 @@ public class StartButtons : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "Start") // for Credits Scene
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "Start")
             SceneManager.LoadScene("Start");
     }
 
@@ -54,4 +54,6 @@ public class StartButtons : MonoBehaviour
         GameObject.Find("AudioM").GetComponent<AudioSource>().volume = 0.696f;
         PlayerPrefs.SetInt("musicTracker", 0);
     }
+
+    public void BackToStart() => SceneManager.LoadScene("Start");
 }

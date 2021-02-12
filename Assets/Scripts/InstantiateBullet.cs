@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class InstantiateBullet : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class InstantiateBullet : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            if (SceneManager.GetActiveScene().name == "1") GameObject.Find("Player").GetComponent<Controls>().instructions.SetTrigger("MoveInstruct");
+
             foreach (GameObject shooter in shooters)
                 shooter.GetComponent<LineRenderer>().enabled = false;
             GameObject.Find("Player").GetComponent<BoxCollider2D>().enabled = true;
@@ -56,7 +59,6 @@ public class InstantiateBullet : MonoBehaviour
             GameObject.Find("AudioM").GetComponent<AudioSource>().Stop();
             Destroy(GameObject.Find("ReflectionsCnt"));
             Destroy(GameObject.Find("CanonMvtSpeed"));
-            Destroy(GameObject.Find("LvlP"));
 
             Destroy(GameObject.Find("ShootB"));
         }
@@ -64,6 +66,8 @@ public class InstantiateBullet : MonoBehaviour
 
     void InstantiateBulletButton()
     {
+        if (SceneManager.GetActiveScene().name == "1") GameObject.Find("Player").GetComponent<Controls>().instructions.SetTrigger("MoveInstruct");
+
         foreach (GameObject shooter in shooters)
             shooter.GetComponent<LineRenderer>().enabled = false;
         GameObject.Find("Player").GetComponent<BoxCollider2D>().enabled = true;
@@ -83,7 +87,6 @@ public class InstantiateBullet : MonoBehaviour
         GameObject.Find("AudioM").GetComponent<AudioSource>().Stop();
         Destroy(GameObject.Find("ReflectionsCnt"));
         Destroy(GameObject.Find("CanonMvtSpeed"));
-        Destroy(GameObject.Find("LvlP"));
 
         Destroy(GameObject.Find("ShootB"));
     }

@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Lvls.unity
     guid: 1472ac3d075c5964aaf9a45a6c08d9d6
   - enabled: 1
+    path: Assets/Scenes/HowToPlay.unity
+    guid: c0975556fdfc7b3469dcadaaef3ae24c
+  - enabled: 1
     path: Assets/Scenes/1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
@@ -72,6 +75,6 @@ EditorBuildSettings:
     path: Assets/Scenes/20.unity
     guid: 5741c998afcf1fa4b9fc6aca55fc9bff
   - enabled: 1
-    path: Assets/Scenes/Credits.unity
-    guid: c0975556fdfc7b3469dcadaaef3ae24c
+    path: Assets/Scenes/Congrats!.unity
+    guid: de06452e90b3a0a4fb66cafb82a55db7
   m_configObjects: {}

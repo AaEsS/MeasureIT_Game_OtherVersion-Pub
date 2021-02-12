@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class ChooseSF : MonoBehaviour
 {
-    public GameObject SF;
-    public GameObject SFOut;
     public GameObject timer;
     public PauseMenuS pauseActive;
 
@@ -21,6 +20,11 @@ public class ChooseSF : MonoBehaviour
     private float deltaX, deltaY;
     private Rigidbody2D rb;
 
+    bool backToNormalTime = false;
+
+    public Animator SFAnims;
+    public Animator instructions;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,11 +35,18 @@ public class ChooseSF : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (backToNormalTime == true && Time.timeScale != 0f)
+        {
+            Time.timeScale += 0.01f;
+            Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+        }
+
         if (Input.touchCount > 0)
         {
-            Time.timeScale = 1f;
-            SF.SetActive(false);
-            SFOut.SetActive(true);
+            if (SceneManager.GetActiveScene().name == "1") instructions.SetTrigger("DragInstruct");
+
+            SFAnims.SetTrigger("SZOut");
+            backToNormalTime = true;
             timer.SetActive(true);
             pauseActive.enabled = true;
             if (musicPlayedOnce == true)
