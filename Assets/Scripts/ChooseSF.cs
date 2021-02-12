@@ -43,7 +43,7 @@ public class ChooseSF : MonoBehaviour
 
         if (Input.touchCount > 0)
         {
-            if (SceneManager.GetActiveScene().name == "1") instructions.SetTrigger("DragInstruct");
+            if (SceneManager.GetActiveScene().name == "1" && PlayerPrefs.GetInt("lvlReached") < 2) instructions.SetTrigger("DragInstruct");
 
             SFAnims.SetTrigger("SZOut");
             backToNormalTime = true;

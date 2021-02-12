@@ -38,7 +38,7 @@ public class InstantiateBullet : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (SceneManager.GetActiveScene().name == "1") GameObject.Find("Player").GetComponent<Controls>().instructions.SetTrigger("MoveInstruct");
+            if (SceneManager.GetActiveScene().name == "1" && PlayerPrefs.GetInt("lvlReached") < 2) GameObject.Find("Player").GetComponent<Controls>().instructions.SetTrigger("MoveInstruct");
 
             foreach (GameObject shooter in shooters)
                 shooter.GetComponent<LineRenderer>().enabled = false;
@@ -66,7 +66,7 @@ public class InstantiateBullet : MonoBehaviour
 
     void InstantiateBulletButton()
     {
-        if (SceneManager.GetActiveScene().name == "1") GameObject.Find("Player").GetComponent<Controls>().instructions.SetTrigger("MoveInstruct");
+        if (SceneManager.GetActiveScene().name == "1" && PlayerPrefs.GetInt("lvlReached") < 2) GameObject.Find("Player").GetComponent<Controls>().instructions.SetTrigger("MoveInstruct");
 
         foreach (GameObject shooter in shooters)
             shooter.GetComponent<LineRenderer>().enabled = false;

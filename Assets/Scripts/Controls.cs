@@ -22,7 +22,7 @@ public class Controls : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            if (SceneManager.GetActiveScene().name == "1") instructions.SetTrigger("ShootInstruct");
+            if (SceneManager.GetActiveScene().name == "1" && PlayerPrefs.GetInt("lvlReached") < 2) instructions.SetTrigger("ShootInstruct");
 
             if (EventSystem.current.IsPointerOverGameObject() || EventSystem.current.currentSelectedGameObject != null) return;
 

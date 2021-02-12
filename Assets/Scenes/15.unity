@@ -1306,6 +1306,7 @@ MonoBehaviour:
   musicOnB: {fileID: 1911021339}
   musicOffB: {fileID: 76453812}
   reflecionsWarning: {fileID: 9218157}
+  instructions: {fileID: 0}
   stopTimer: 0
 --- !u!114 &239089829
 MonoBehaviour:
@@ -1314,7 +1315,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239089823}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e3b138f6d9afa44896f06b641a9f4b0, type: 3}
   m_Name: 

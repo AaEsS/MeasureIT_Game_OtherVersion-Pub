@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class ButtonS : MonoBehaviour
 {
     public Button restartB, lvlsB, exitB, refPrecisionL, refPrecisionR;
-    public GameObject musicOnB, musicOffB, reflecionsWarning;
+    public GameObject musicOnB, musicOffB, reflecionsWarning, instructions;
 
     public bool stopTimer = false;
 
@@ -47,6 +47,8 @@ public class ButtonS : MonoBehaviour
             PlayerPrefs.SetInt("refsWarnTracker", PlayerPrefs.GetInt("refsWarnTracker") + 1);
             if (PlayerPrefs.GetInt("refsWarnTracker") <= 3) reflecionsWarning.SetActive(true);
         }
+
+        if (SceneManager.GetActiveScene().name == "1" && PlayerPrefs.GetInt("lvlReached") < 2) instructions.SetActive(true);
 
         Button restart = restartB.GetComponent<Button>();
         restart.onClick.AddListener(RestartGameByB);

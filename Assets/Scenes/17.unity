@@ -1163,7 +1163,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239089823}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0316262f1447caf4da9cfd5489fa7435, type: 3}
   m_Name: 
@@ -1176,6 +1176,7 @@ MonoBehaviour:
   musicOnB: {fileID: 2105737038}
   musicOffB: {fileID: 1924450118}
   reflecionsWarning: {fileID: 150509235}
+  instructions: {fileID: 0}
   stopTimer: 0
 --- !u!114 &239089829
 MonoBehaviour:
