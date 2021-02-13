@@ -34,22 +34,23 @@ public class TimerWin : MonoBehaviour
         }
         else
         {
+            GameObject.Find("Canvas").GetComponent<PauseMenuS>().enabled = false;
+            GameObject.Find("Player").GetComponent<ChooseSF>().enabled = false;
+
             if (noiceSoundOnce == true && GameObject.Find("Player").GetComponent<ChooseSF>().collectableCount >= 3)
             {
                 nextLvlAnims.SetTrigger("GoToNext");
                 LvlAfterUnlocked();
                 noiceSoundPlayer.PlayOneShot(noiceSound);
                 noiceSoundOnce = false;
-                GameObject.Find("Canvas").GetComponent<PauseMenuS>().enabled = false;
-                GameObject.Find("Player").GetComponent<ChooseSF>().enabled = false;
             }
             if (GameObject.Find("Player").GetComponent<ChooseSF>().collectableCount < 3)
             {
                 pickupLoss.SetActive(true);
                 Invoke("RestartAfterPickupLoss", 2.2f);
-                GameObject.Find("Canvas").GetComponent<PauseMenuS>().enabled = false;
-                GameObject.Find("Player").GetComponent<ChooseSF>().enabled = false;
             }
+            if (PlayerPrefs.GetInt($"{SceneManager.GetActiveScene().name}StarsTracker", 0) < GameObject.Find("Player").GetComponent<ChooseSF>().collectableCount)
+                PlayerPrefs.SetInt($"{SceneManager.GetActiveScene().name}StarsTracker", GameObject.Find("Player").GetComponent<ChooseSF>().collectableCount);
         }
     }
 

@@ -12,12 +12,6 @@ public class StartButtons : MonoBehaviour
     public void LoadLevels() => SceneManager.LoadScene("Lvls");
     public void LoadHowToplay() => SceneManager.LoadScene("HowToPlay");
     public void GTFO() => Application.Quit();
-    int musicTracker;
-
-    private void Awake()
-    {
-        musicTracker = PlayerPrefs.GetInt("musicTracker", 1);
-    }
 
     void Update()
     {
