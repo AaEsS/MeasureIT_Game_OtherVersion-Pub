@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class ChooseSF : MonoBehaviour
 {
-    public GameObject timer;
+    public GameObject timer, collectables;
     public PauseMenuS pauseActive;
 
     AudioSource slowMoOutSoundPlayer;
     public AudioClip slowMoOutSound;
+    public AudioClip collectableSound;
 
     AudioSource intenseMusic;
 
@@ -24,6 +25,8 @@ public class ChooseSF : MonoBehaviour
 
     public Animator SFAnims;
     public Animator instructions;
+
+    public int collectableCount = 0;
 
     void Start()
     {
@@ -45,6 +48,7 @@ public class ChooseSF : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().name == "1" && PlayerPrefs.GetInt("lvlReached") < 2) instructions.SetTrigger("DragInstruct");
 
+            collectables.SetActive(true);
             SFAnims.SetTrigger("SZOut");
             backToNormalTime = true;
             timer.SetActive(true);
@@ -79,5 +83,15 @@ public class ChooseSF : MonoBehaviour
 
         if (GameObject.Find("Timer").GetComponent<TimerWin>().howMuchTime < 0f)
             intenseMusic.Stop();
+    }
+
+    private void OnTriggerEnter2D(Collider2D trig)
+    {
+        if (trig.gameObject.CompareTag("Collectable"))
+        {
+            AudioSource.PlayClipAtPoint(collectableSound, transform.position);
+            Destroy(trig.gameObject);
+            collectableCount++;
+        }
     }
 }

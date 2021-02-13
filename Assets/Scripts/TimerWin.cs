@@ -14,6 +14,8 @@ public class TimerWin : MonoBehaviour
     bool noiceSoundOnce = true;
 
     public Animator nextLvlAnims;
+
+    public GameObject pickupLoss;
     
     // Start is called before the first frame update
     void Start()
@@ -30,15 +32,28 @@ public class TimerWin : MonoBehaviour
             howMuchTime -= Time.deltaTime;
             timer.text = Mathf.Round(howMuchTime).ToString();
         }
-        else if (noiceSoundOnce == true)
+        else
         {
-            nextLvlAnims.SetTrigger("GoToNext");
-            LvlAfterUnlocked();
-            noiceSoundPlayer.PlayOneShot(noiceSound);
-            noiceSoundOnce = false;
-            GameObject.Find("Canvas").GetComponent<PauseMenuS>().enabled = false;
+            if (noiceSoundOnce == true && GameObject.Find("Player").GetComponent<ChooseSF>().collectableCount >= 3)
+            {
+                nextLvlAnims.SetTrigger("GoToNext");
+                LvlAfterUnlocked();
+                noiceSoundPlayer.PlayOneShot(noiceSound);
+                noiceSoundOnce = false;
+                GameObject.Find("Canvas").GetComponent<PauseMenuS>().enabled = false;
+                GameObject.Find("Player").GetComponent<ChooseSF>().enabled = false;
+            }
+            if (GameObject.Find("Player").GetComponent<ChooseSF>().collectableCount < 3)
+            {
+                pickupLoss.SetActive(true);
+                Invoke("RestartAfterPickupLoss", 2.2f);
+                GameObject.Find("Canvas").GetComponent<PauseMenuS>().enabled = false;
+                GameObject.Find("Player").GetComponent<ChooseSF>().enabled = false;
+            }
         }
     }
+
+    void RestartAfterPickupLoss() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     public void StartTimer()
     {

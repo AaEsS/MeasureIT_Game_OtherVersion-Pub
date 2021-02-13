@@ -8,9 +8,8 @@ TagManager:
   - Bullet
   - ShooterPivot
   - Shooter
-  - Buttons
   - Canon
-  - StartButtonsText
+  - Collectable
   layers:
   - Default
   - TransparentFX
