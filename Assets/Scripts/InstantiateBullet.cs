@@ -55,7 +55,7 @@ public class InstantiateBullet : MonoBehaviour
             Destroy(GameObject.Find("Player").GetComponent<DragMouseMove>());
             clickSF.enabled = true;
             pauseMScript.enabled = false;
-            slowMoInSoundPlayer.PlayOneShot(slowMoInSound);
+            if (transform.parent.transform.parent.gameObject.name == "Canon") slowMoInSoundPlayer.PlayOneShot(slowMoInSound);
             GameObject.Find("AudioM").GetComponent<AudioSource>().Stop();
             Destroy(GameObject.Find("ReflectionsCnt"));
             Destroy(GameObject.Find("CanonMvtSpeed"));
@@ -83,7 +83,7 @@ public class InstantiateBullet : MonoBehaviour
         Destroy(GameObject.Find("Player").GetComponent<DragMouseMove>());
         clickSF.enabled = true;
         pauseMScript.enabled = false;
-        slowMoInSoundPlayer.PlayOneShot(slowMoInSound);
+        if (transform.parent.transform.parent.gameObject.name == "Canon") slowMoInSoundPlayer.PlayOneShot(slowMoInSound);
         GameObject.Find("AudioM").GetComponent<AudioSource>().Stop();
         Destroy(GameObject.Find("ReflectionsCnt"));
         Destroy(GameObject.Find("CanonMvtSpeed"));
