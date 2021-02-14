@@ -52,7 +52,7 @@ public class BulletMvt : MonoBehaviour
     void Update()
     {
         dir = blt.velocity;
-        if (GameObject.Find("Timer").GetComponent<TimerWin>().howMuchTime < 0f)
+        if (GameObject.Find("Timer") != null && GameObject.Find("Timer").GetComponent<TimerWin>().howMuchTime < 0f)
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 }

@@ -81,7 +81,7 @@ public class ChooseSF : MonoBehaviour
             }
         }
 
-        if (GameObject.Find("Timer").GetComponent<TimerWin>().howMuchTime < 0f)
+        if (GameObject.Find("Timer") != null && GameObject.Find("Timer").GetComponent<TimerWin>().howMuchTime < 0f)
             intenseMusic.Stop();
     }
 

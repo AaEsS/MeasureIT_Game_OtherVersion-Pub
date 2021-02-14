@@ -37,7 +37,8 @@ public class RayRef : MonoBehaviour
         var hitData = Physics2D.Raycast(startPoint, (direction - startPoint).normalized, defaultRayDistance);
 
         startPoint = new Vector2(transform.parent.transform.parent.gameObject.transform.position.x, transform.parent.transform.parent.gameObject.transform.position.y);
-        direction = new Vector2(GameObject.Find("Player").transform.position.x, GameObject.Find("Player").transform.position.y);
+        if (GameObject.Find("Player") != null)
+            direction = new Vector2(GameObject.Find("Player").transform.position.x, GameObject.Find("Player").transform.position.y);
 
         currentReflections = 0;
         Points.Clear();
