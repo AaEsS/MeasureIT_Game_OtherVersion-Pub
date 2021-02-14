@@ -24,9 +24,7 @@ public class LvlLock : MonoBehaviour
         {
             for (int p = 1; p <= PlayerPrefs.GetInt($"{k + 1}StarsTracker"); p++)
             {
-                Color clr = lvLBs[k].transform.GetChild(p).GetComponent<Image>().color;
-                clr.a = 1f;
-                lvLBs[k].transform.GetChild(p).GetComponent<Image>().color = clr;
+                lvLBs[k].transform.GetChild(p).GetComponent<Image>().color = new Color32(255, 255, 255, 255);
             }
         }
     }
