@@ -27,7 +27,7 @@ public class PauseMenuS : MonoBehaviour
             if (GamePaused)
             {
                 ResumeGame();
-                if (chooseSF.enabled == false)
+                if (chooseSF != null && chooseSF.enabled == false)
                     foreach (GameObject shooter in shooters)
                         shooter.GetComponent<InstantiateBullet>().enabled = true;
                 else

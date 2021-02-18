@@ -80,7 +80,7 @@ public class ButtonS : MonoBehaviour
             gameObject.AddComponent<GameManS>().RestartLvl();
         }
 
-        if (stopTimer == true) GameObject.Find("Timer").GetComponent<TimerWin>().enabled = false;
+        if (stopTimer == true && GameObject.Find("Timer") != null) GameObject.Find("Timer").GetComponent<TimerWin>().enabled = false;
     }
 
     public void RestartGameByB()

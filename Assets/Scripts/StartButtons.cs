@@ -21,16 +21,20 @@ public class StartButtons : MonoBehaviour
 
     void Start()
     {
-        Button musicOn = musicOnB.GetComponent<Button>();
-        musicOn.onClick.AddListener(ToggleMusicOff);
-        Button musicOff = musicOffB.GetComponent<Button>();
-        musicOff.onClick.AddListener(ToggleMusicOn);
+        if (SceneManager.GetActiveScene().name != "Congrats!")
+        {
+            Button musicOn = musicOnB.GetComponent<Button>();
+            musicOn.onClick.AddListener(ToggleMusicOff);
+            Button musicOff = musicOffB.GetComponent<Button>();
+            musicOff.onClick.AddListener(ToggleMusicOn);
+        
 
-        if (PlayerPrefs.GetInt("musicTracker") == 0) ToggleMusicOn();
-        else ToggleMusicOff();
+            if (PlayerPrefs.GetInt("musicTracker") == 0) ToggleMusicOn();
+            else ToggleMusicOff();
 
-        if (!GameObject.Find("AudioM").GetComponent<AudioSource>().isPlaying)
-            GameObject.Find("AudioM").GetComponent<AudioSource>().Play();
+            if (!GameObject.Find("AudioM").GetComponent<AudioSource>().isPlaying)
+                GameObject.Find("AudioM").GetComponent<AudioSource>().Play();
+        }
     }
 
     void ToggleMusicOff()
