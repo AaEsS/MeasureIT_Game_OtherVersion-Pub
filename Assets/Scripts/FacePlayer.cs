@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class FacePlayer : MonoBehaviour
 {
-    public Transform target;
+    Transform target;
     float fovCanonAngle;
+
+    private void Start()
+    {
+        target = GameObject.Find("Player").transform;
+    }
 
     // Update is called once per frame
     void Update()

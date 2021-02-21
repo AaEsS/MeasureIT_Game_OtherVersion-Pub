@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class ButtonS : MonoBehaviour
 {
-    public Button restartB, lvlsB, exitB, refPrecisionL, refPrecisionR;
+    public Button restartB, lvlsB, exitB, refPrecisionL, refPrecisionR, pauseB;
     public GameObject musicOnB, musicOffB, reflecionsWarning, instructions;
 
     public bool stopTimer = false;
@@ -69,6 +69,9 @@ public class ButtonS : MonoBehaviour
         refPrecisionL.onClick.AddListener(DecreaseBy1Ref);
         refPrecisionR = GameObject.Find("RefPBR").GetComponent<Button>();
         refPrecisionR.onClick.AddListener(IncreaseBy1Ref);
+
+        pauseB = GameObject.Find("PauseB").GetComponent<Button>();
+        pauseB.onClick.AddListener(gameObject.GetComponent<PauseMenuS>().PauseGame);
     }
 
     // Update is called once per frame
