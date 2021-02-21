@@ -59,7 +59,7 @@ public class InstantiateBullet : MonoBehaviour
             GameObject.Find("AudioM").GetComponent<AudioSource>().Stop();
             Destroy(GameObject.Find("ReflectionsCnt"));
             Destroy(GameObject.Find("CanonMvtSpeed"));
-
+            GameObject.Find("PauseB").transform.position += new Vector3(1000f, 1000f);
             Destroy(GameObject.Find("ShootB"));
         }
     }
@@ -87,7 +87,7 @@ public class InstantiateBullet : MonoBehaviour
         GameObject.Find("AudioM").GetComponent<AudioSource>().Stop();
         Destroy(GameObject.Find("ReflectionsCnt"));
         Destroy(GameObject.Find("CanonMvtSpeed"));
-
+        GameObject.Find("PauseB").transform.position += new Vector3(1000f, 1000f);
         Destroy(GameObject.Find("ShootB"));
     }
 

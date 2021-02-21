@@ -22,6 +22,7 @@ public class ChooseSF : MonoBehaviour
     private Rigidbody2D rb;
 
     bool backToNormalTime = false;
+    bool pauseBNotPlaced = true;
 
     public Animator SFAnims;
     public Animator instructions;
@@ -48,6 +49,8 @@ public class ChooseSF : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().name == "1" && PlayerPrefs.GetInt("lvlReached") < 2) instructions.SetTrigger("DragInstruct");
 
+            if (pauseBNotPlaced) GameObject.Find("PauseB").transform.position = GetComponent<ClampPlayer>().pauseBpos;
+            pauseBNotPlaced = false;
             collectables.SetActive(true);
             SFAnims.SetTrigger("SZOut");
             backToNormalTime = true;

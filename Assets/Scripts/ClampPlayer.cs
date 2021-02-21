@@ -10,6 +10,8 @@ public class ClampPlayer : MonoBehaviour
     private float objectHeight;
     GameObject[] canons;
 
+    public Vector2 pauseBpos;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -35,6 +37,11 @@ public class ClampPlayer : MonoBehaviour
                     canon.transform.position = new Vector2(GameObject.Find("ForWalls2").transform.position.x - (4.1f - Mathf.Abs(canon.transform.position.x)), canon.transform.position.y);
             }
         }
+    }
+
+    private void Start()
+    {
+        pauseBpos = GameObject.Find("PauseB").transform.position;
     }
 
     // Update is called once per frame
