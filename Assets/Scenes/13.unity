@@ -268,7 +268,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 64.6}
-  m_SizeDelta: {x: 241.7, y: 90}
+  m_SizeDelta: {x: 265, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &49222756
 MonoBehaviour:
@@ -347,8 +347,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f5c196f5402488940880ba2cdc7ed0ee, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -815,6 +815,7 @@ GameObject:
   m_Component:
   - component: {fileID: 228635138}
   - component: {fileID: 228635139}
+  - component: {fileID: 228635140}
   m_Layer: 0
   m_Name: ShadowWalls1
   m_TagString: Untagged
@@ -886,6 +887,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &228635140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228635137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391bc602f1baa054ba00a141a0462b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 0.02
 --- !u!1 &239089823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2360,7 +2374,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -93.2}
-  m_SizeDelta: {x: 241.7, y: 90}
+  m_SizeDelta: {x: 265, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &719946034
 MonoBehaviour:
@@ -2439,8 +2453,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f5c196f5402488940880ba2cdc7ed0ee, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2467,6 +2481,7 @@ GameObject:
   m_Component:
   - component: {fileID: 729079974}
   - component: {fileID: 729079975}
+  - component: {fileID: 729079976}
   m_Layer: 0
   m_Name: ShadowWalls2
   m_TagString: Untagged
@@ -2538,6 +2553,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &729079976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729079973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391bc602f1baa054ba00a141a0462b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 0.02
 --- !u!1001 &755893665
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2578,22 +2606,22 @@ PrefabInstance:
     - target: {fileID: 1000408514970994529, guid: 885ae04680abde34fa71202038bd153e,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000408514970994529, guid: 885ae04680abde34fa71202038bd153e,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1000408514970994529, guid: 885ae04680abde34fa71202038bd153e,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000408514970994529, guid: 885ae04680abde34fa71202038bd153e,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1000408514970994529, guid: 885ae04680abde34fa71202038bd153e,
         type: 3}
@@ -2603,7 +2631,7 @@ PrefabInstance:
     - target: {fileID: 1000408514970994529, guid: 885ae04680abde34fa71202038bd153e,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 28.170403
+      value: 28.17041
       objectReference: {fileID: 0}
     - target: {fileID: 1000408514970994529, guid: 885ae04680abde34fa71202038bd153e,
         type: 3}
@@ -2643,12 +2671,12 @@ PrefabInstance:
     - target: {fileID: 1000408514970994529, guid: 885ae04680abde34fa71202038bd153e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 163.3
+      value: 169.3
       objectReference: {fileID: 0}
     - target: {fileID: 1000408514970994529, guid: 885ae04680abde34fa71202038bd153e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 634
+      value: -77
       objectReference: {fileID: 0}
     - target: {fileID: 1000408514970994529, guid: 885ae04680abde34fa71202038bd153e,
         type: 3}
@@ -2805,7 +2833,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -408.8}
-  m_SizeDelta: {x: 131.4, y: 90}
+  m_SizeDelta: {x: 155, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &836147081
 MonoBehaviour:
@@ -2884,8 +2912,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f5c196f5402488940880ba2cdc7ed0ee, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3046,6 +3074,7 @@ GameObject:
   m_Component:
   - component: {fileID: 902261446}
   - component: {fileID: 902261447}
+  - component: {fileID: 902261448}
   m_Layer: 0
   m_Name: ShadowWalls1
   m_TagString: Untagged
@@ -3117,6 +3146,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &902261448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902261445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391bc602f1baa054ba00a141a0462b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 0.02
 --- !u!1 &909017473
 GameObject:
   m_ObjectHideFlags: 0
@@ -4073,6 +4115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1275494667}
   - component: {fileID: 1275494668}
+  - component: {fileID: 1275494669}
   m_Layer: 0
   m_Name: ShadowWalls1
   m_TagString: Untagged
@@ -4144,6 +4187,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1275494669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275494666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391bc602f1baa054ba00a141a0462b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 0.02
 --- !u!1 &1276526032
 GameObject:
   m_ObjectHideFlags: 0
@@ -4988,7 +5044,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Drag to
+  m_Text: "Drag from \nanywhere to\n"
 --- !u!222 &1659617311
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5169,7 +5225,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -251}
-  m_SizeDelta: {x: 215.5, y: 90}
+  m_SizeDelta: {x: 236, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1716148587
 MonoBehaviour:
@@ -5248,8 +5304,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f5c196f5402488940880ba2cdc7ed0ee, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

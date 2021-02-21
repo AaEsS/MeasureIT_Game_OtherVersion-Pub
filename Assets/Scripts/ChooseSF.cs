@@ -29,6 +29,10 @@ public class ChooseSF : MonoBehaviour
 
     public int collectableCount = 0;
 
+    public int HP = 3;
+    bool hitNotDead = false;
+    float damageEffectTime = 0f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -39,6 +43,14 @@ public class ChooseSF : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (damageEffectTime > 2f)
+        {
+            GameObject.Find("Player").GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
+            GameObject.Find("Player").GetComponent<BoxCollider2D>().enabled = true;
+            hitNotDead = false;
+        }
+        if (hitNotDead == true) damageEffectTime += Time.deltaTime;
+
         if (backToNormalTime == true && Time.timeScale != 0f)
         {
             Time.timeScale += 0.01f;
@@ -75,6 +87,31 @@ public class ChooseSF : MonoBehaviour
             AudioSource.PlayClipAtPoint(collectableSound, transform.position);
             Destroy(trig.gameObject);
             collectableCount++;
+        }
+
+        if (trig.gameObject.CompareTag("Bullet"))
+        {
+            if (HP <= 1)
+            {
+                Time.timeScale = 1f;
+                Destroy(GameObject.Find("Player"));
+                Destroy(GameObject.Find("ShooterPivot").GetComponent<FacePlayer>());
+                GameObject.Find("GameMan").GetComponent<GameManS>().enabled = true;
+                GameObject.Find("Canvas").GetComponent<ButtonS>().stopTimer = true;
+                GameObject.Find("HealthBar").GetComponent<Shake>().ShakeIt(0.5f);
+                GameObject.Find("HealthBar").GetComponent<HealthBarScript>().SetHealth(HP - 1);
+            }
+            else
+            {
+                GetComponent<ShakePlayer>().ShakeIt(0.3f);
+                GameObject.Find("HealthBar").GetComponent<Shake>().ShakeIt(0.5f);
+                GameObject.Find("HealthBar").GetComponent<HealthBarScript>().SetHealth(HP - 1);
+                HP -= 1;
+                GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.5f);
+                GetComponent<BoxCollider2D>().enabled = false;
+                damageEffectTime = 0f;
+                hitNotDead = true;
+            }
         }
     }
 }

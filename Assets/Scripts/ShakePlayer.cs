@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shake : MonoBehaviour
+public class ShakePlayer : MonoBehaviour
 {
     [Range(0f, 2f)]
     public float intensity;
@@ -13,7 +13,6 @@ public class Shake : MonoBehaviour
     void Start()
     {
         target = GetComponent<Transform>();
-        initialPos = target.localPosition;
     }
 
     float shakeDur = 0f;
@@ -28,6 +27,7 @@ public class Shake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        initialPos = target.localPosition;
         if (shakeDur > 0 && !isShaking) StartCoroutine(DoShake());
     }
 

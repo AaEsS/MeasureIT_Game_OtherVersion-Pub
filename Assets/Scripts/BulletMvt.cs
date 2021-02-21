@@ -14,6 +14,7 @@ public class BulletMvt : MonoBehaviour
     AudioSource wallHitSound;
     public AudioClip WHSound;
     public AudioClip DSound;
+    public AudioClip HitSound;
     GameObject[] bullets;
 
     void Start()
@@ -36,16 +37,24 @@ public class BulletMvt : MonoBehaviour
         blt.velocity = direction * Mathf.Max(speed, 0f);
         wallHitSound.PlayOneShot(WHSound);
 
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Wall")) collision.gameObject.transform.GetChild(0).GetComponent<Shake>().ShakeIt(0.1f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D trigg)
+    {
+        if (trigg.gameObject.CompareTag("Player"))
         {
-            Time.timeScale = 1f;
-            AudioSource.PlayClipAtPoint(DSound, transform.position);
-            Destroy(GameObject.Find("Player"));
-            Destroy(GameObject.Find("ShooterPivot").GetComponent<FacePlayer>());
-            foreach (GameObject bullet in bullets)
-                Destroy(bullet);
-            GameObject.Find("GameMan").GetComponent<GameManS>().enabled = true;
-            GameObject.Find("Canvas").GetComponent<ButtonS>().stopTimer = true;
+            if (trigg.gameObject.GetComponent<ChooseSF>().HP <= 1)
+            {
+                Time.timeScale = 1f;
+                AudioSource.PlayClipAtPoint(DSound, transform.position);
+                foreach (GameObject bullet in bullets)
+                    Destroy(bullet);
+            }
+            else
+            {
+                AudioSource.PlayClipAtPoint(HitSound, transform.position);
+            }
         }
     }
 

@@ -49,7 +49,7 @@ public class Jystck : MonoBehaviour
             if (touchStart)
             {
                 Vector2 offset = pointB - pointA;
-                Vector2 direction = Vector2.ClampMagnitude(offset, 1f);
+                Vector2 direction = Vector2.ClampMagnitude(offset, 0.3f);
                 moveCharacter(direction);
 
                 handle.transform.position = new Vector2(pointA.x + direction.x, pointA.y + direction.y);
