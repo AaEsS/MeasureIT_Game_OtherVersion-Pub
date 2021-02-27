@@ -27,40 +27,38 @@ public class Jystck : MonoBehaviour
         speed = 30f / Time.timeScale;
 
         if (EventSystem.current.IsPointerOverGameObject() || EventSystem.current.currentSelectedGameObject != null) return;
-        if (GameObject.Find("Timer") == null || GameObject.Find("Timer").GetComponent<TimerWin>().howMuchTime >= 0f)
+        
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                pointA = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
+            pointA = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
 
-                handle.transform.position = pointA;
-                circle.transform.position = pointA;
-                handle.GetComponent<SpriteRenderer>().enabled = true;
-                circle.GetComponent<SpriteRenderer>().enabled = true;
-            }
-            if (Input.GetMouseButton(0))
-            {
-                touchStart = true;
-                pointB = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
-            }
-            else
-            {
-                touchStart = false;
-            }
+            handle.transform.position = pointA;
+            circle.transform.position = pointA;
+            handle.GetComponent<SpriteRenderer>().enabled = true;
+            circle.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            touchStart = true;
+            pointB = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
+        }
+        else
+        {
+            touchStart = false;
+        }
 
-            if (touchStart)
-            {
-                Vector2 offset = pointB - pointA;
-                Vector2 direction = Vector2.ClampMagnitude(offset, 0.1f);
-                moveCharacter(direction);
+        if (touchStart)
+        {
+            Vector2 offset = pointB - pointA;
+            Vector2 direction = Vector2.ClampMagnitude(offset, 0.1f);
+            moveCharacter(direction);
 
-                handle.transform.position = new Vector2(pointA.x + direction.x, pointA.y + direction.y);
-            }
-            else
-            {
-                handle.GetComponent<SpriteRenderer>().enabled = false;
-                circle.GetComponent<SpriteRenderer>().enabled = false;
-            }
+            handle.transform.position = new Vector2(pointA.x + direction.x, pointA.y + direction.y);
+        }
+        else
+        {
+            handle.GetComponent<SpriteRenderer>().enabled = false;
+            circle.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 
