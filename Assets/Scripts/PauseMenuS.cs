@@ -8,7 +8,6 @@ public class PauseMenuS : MonoBehaviour
     public static bool GamePaused = false;
     public GameObject pauseMenuUI;
     GameObject[] shooters;
-    public ChooseSF chooseSF;
     public Button resumeB;
 
     // Start is called before the first frame update
@@ -24,25 +23,8 @@ public class PauseMenuS : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GamePaused)
-            {
-                ResumeGame();
-                if (chooseSF != null && chooseSF.enabled == false)
-                    foreach (GameObject shooter in shooters)
-                        shooter.GetComponent<InstantiateBullet>().enabled = true;
-                else
-                {
-                    foreach (GameObject shooter in shooters)
-                        shooter.GetComponent<InstantiateBullet>().enabled = false;
-                }
-            }
-            else
-            {
-                PauseGame();
-                foreach (GameObject shooter in shooters)
-                    shooter.GetComponent<InstantiateBullet>().enabled = false;
-            }
-
+            if (GamePaused) ResumeGame();
+            else PauseGame();
         }
     }
 
@@ -62,20 +44,8 @@ public class PauseMenuS : MonoBehaviour
 
     void ResumeGameByB()
     {
-        if (chooseSF.enabled == false)
-        {
-            pauseMenuUI.SetActive(false);
-            Time.timeScale = 1f;
-            GamePaused = false;
-            foreach (GameObject shooter in shooters)
-                shooter.GetComponent<InstantiateBullet>().enabled = true;
-        }
-        else
-        {
-            pauseMenuUI.SetActive(false);
-            Time.timeScale = 1f;
-            GamePaused = false;
-        }
-        
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        GamePaused = false;
     }
 }

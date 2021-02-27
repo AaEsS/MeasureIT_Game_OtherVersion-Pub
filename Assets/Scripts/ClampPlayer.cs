@@ -10,8 +10,6 @@ public class ClampPlayer : MonoBehaviour
     private float objectHeight;
     GameObject[] canons;
 
-    public Vector2 pauseBpos;
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,8 +24,8 @@ public class ClampPlayer : MonoBehaviour
 
         if (Mathf.Abs((screenBounds.x - objectWidth - 0.12f) - 4.1f) != 1.543335f) // 4.1 == default Wall x position && 1.543335 == distance between player.x limit and |wall.x|
         {
-            GameObject.Find("ForWalls1").transform.position = new Vector2(-((screenBounds.x - objectWidth - 0.12f) + 1.543335f), GameObject.Find("ForWalls1").transform.position.y);
-            GameObject.Find("ForWalls2").transform.position = new Vector2((screenBounds.x - objectWidth - 0.12f) + 1.543335f, GameObject.Find("ForWalls2").transform.position.y);
+            GameObject.Find("ForWalls1").transform.position = new Vector2(-((screenBounds.x - 0.15f - 0.12f) + 1.543335f), GameObject.Find("ForWalls1").transform.position.y);
+            GameObject.Find("ForWalls2").transform.position = new Vector2((screenBounds.x - 0.15f - 0.12f) + 1.543335f, GameObject.Find("ForWalls2").transform.position.y);
 
             foreach (GameObject canon in canons)
             {
@@ -37,11 +35,6 @@ public class ClampPlayer : MonoBehaviour
                     canon.transform.position = new Vector2(GameObject.Find("ForWalls2").transform.position.x - (4.1f - Mathf.Abs(canon.transform.position.x)), canon.transform.position.y);
             }
         }
-    }
-
-    private void Start()
-    {
-        pauseBpos = GameObject.Find("PauseB").transform.position;
     }
 
     // Update is called once per frame

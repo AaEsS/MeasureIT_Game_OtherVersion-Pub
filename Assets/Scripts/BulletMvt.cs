@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Audio;
 
 public class BulletMvt : MonoBehaviour
 {
@@ -44,7 +40,7 @@ public class BulletMvt : MonoBehaviour
     {
         if (trigg.gameObject.CompareTag("Player"))
         {
-            if (trigg.gameObject.GetComponent<ChooseSF>().HP <= 1)
+            if (trigg.gameObject.GetComponent<Controls>().HP <= 1)
             {
                 Time.timeScale = 1f;
                 AudioSource.PlayClipAtPoint(DSound, transform.position);
@@ -61,7 +57,5 @@ public class BulletMvt : MonoBehaviour
     void Update()
     {
         dir = blt.velocity;
-        if (GameObject.Find("Timer") != null && GameObject.Find("Timer").GetComponent<TimerWin>().howMuchTime < 0f)
-            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 }
