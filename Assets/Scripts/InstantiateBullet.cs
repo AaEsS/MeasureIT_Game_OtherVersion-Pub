@@ -36,10 +36,4 @@ public class InstantiateBullet : MonoBehaviour
             nextFire = Time.time + fireRate;
         }
     }
-
-    //void DoSlowMo()
-    //{
-    //    Time.timeScale = 0.03f;
-    //    Time.fixedDeltaTime = Time.timeScale * 0.02f;
-    //}
 }
