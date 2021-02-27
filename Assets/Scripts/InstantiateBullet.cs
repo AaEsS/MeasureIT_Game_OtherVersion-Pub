@@ -2,8 +2,6 @@
 
 public class InstantiateBullet : MonoBehaviour
 {
-    public PauseMenuS pauseMScript;
-
     AudioSource slowMoInSoundPlayer;
     public AudioClip slowMoInSound;
     

@@ -4,8 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class ButtonS : MonoBehaviour
 {
-    public Button restartB, lvlsB, exitB, pauseB;
-    public GameObject musicOnB, musicOffB;
+    public static bool gamePaused = false;
+    public GameObject pauseMenuUI, musicB;
+    public Sprite musicOnSprite, musicOffSprite;
 
     // Start is called before the first frame update
     void Start()
@@ -15,9 +16,8 @@ public class ButtonS : MonoBehaviour
             foreach (GameObject canon in GameObject.FindGameObjectsWithTag("Canon"))
                 canon.GetComponent<CanonMvt>().frequency = 0.1f;
         }
-
-        if (PlayerPrefs.GetInt("musicTracker") == 0) ToggleMusicOn();
-        else ToggleMusicOff();
+        if (PlayerPrefs.GetInt("musicTracker") == 0) MusicOff();
+        else MusicOn();
     }
 
     // Update is called once per frame
@@ -28,55 +28,64 @@ public class ButtonS : MonoBehaviour
             Time.timeScale = 1f;
             Restart();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (gamePaused) ResumeGame();
+            else PauseGame();
+        }
     }
 
-    public void RestartGameByB()
+    public void ResumeGame()
+    {
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        gamePaused = false;
+    }
+
+    public void PauseGame()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        gamePaused = true;
+    }
+
+    public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
     }
 
-    public void LoadLevelsByB()
+    public void LoadLevels()
     {
         SceneManager.LoadScene("Lvls");
         Time.timeScale = 1f;
     }
 
-    public void LoadStartByB()
+    public void LoadStart()
     {
         SceneManager.LoadScene("Start");
         Time.timeScale = 1f;
     }
 
-    public void ToggleMusicOff()
+    public void ToggleMusic()
     {
-        musicOffB.SetActive(true);
-        musicOnB.SetActive(false);
-        GameObject.Find("AudioM").GetComponent<AudioSource>().volume = 0f;
-        GameObject.Find("Player").GetComponent<AudioSource>().volume = 0f;
+        if (PlayerPrefs.GetInt("musicTracker") == 0) MusicOn();
+        else MusicOff();
+    }
+
+    void MusicOn()
+    {
+        musicB.GetComponent<Image>().sprite = musicOnSprite;
+        GameObject.Find("AudioM").GetComponent<AudioSource>().volume = 0.696f;
         PlayerPrefs.SetInt("musicTracker", 1);
     }
-
-    public void ToggleMusicOn()
+    void MusicOff()
     {
-        musicOnB.SetActive(true);
-        musicOffB.SetActive(false);
-        GameObject.Find("AudioM").GetComponent<AudioSource>().volume = 0.696f;
-        GameObject.Find("Player").GetComponent<AudioSource>().volume = 1f;
+        musicB.GetComponent<Image>().sprite = musicOffSprite;
+        GameObject.Find("AudioM").GetComponent<AudioSource>().volume = 0f;
         PlayerPrefs.SetInt("musicTracker", 0);
     }
-
-    //public void ToggleSoundsOff()
-    //{
-    //    soundsOffB.SetActive(true);
-    //    soundsOnB.SetActive(false);
-    //}
-
-    //public void ToggleSoundsOn()
-    //{
-    //    soundsOnB.SetActive(true);
-    //    soundsOffB.SetActive(false);
-    //}
 
     public void RestartAfterDeath() => Invoke("Restart", 1f);
     void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);

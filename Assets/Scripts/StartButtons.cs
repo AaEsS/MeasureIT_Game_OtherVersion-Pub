@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartButtons : MonoBehaviour
 {
-    public GameObject musicOnB, musicOffB;
+    public GameObject musicB;
+    public Sprite musicOnSprite, musicOffSprite;
 
     public void StartPlaying() => SceneManager.LoadScene("1");
     public void LoadLevels() => SceneManager.LoadScene("Lvls");
@@ -21,35 +20,29 @@ public class StartButtons : MonoBehaviour
 
     void Start()
     {
-        if (SceneManager.GetActiveScene().name != "Congrats!")
-        {
-            Button musicOn = musicOnB.GetComponent<Button>();
-            musicOn.onClick.AddListener(ToggleMusicOff);
-            Button musicOff = musicOffB.GetComponent<Button>();
-            musicOff.onClick.AddListener(ToggleMusicOn);
-        
+        if (!GameObject.Find("AudioM").GetComponent<AudioSource>().isPlaying)
+            GameObject.Find("AudioM").GetComponent<AudioSource>().Play();
 
-            if (PlayerPrefs.GetInt("musicTracker") == 0) ToggleMusicOn();
-            else ToggleMusicOff();
-
-            if (!GameObject.Find("AudioM").GetComponent<AudioSource>().isPlaying)
-                GameObject.Find("AudioM").GetComponent<AudioSource>().Play();
-        }
+        if (PlayerPrefs.GetInt("musicTracker") == 0) MusicOff();
+        else MusicOn();
     }
 
-    void ToggleMusicOff()
+    public void ToggleMusic()
     {
-        musicOffB.SetActive(true);
-        musicOnB.SetActive(false);
-        GameObject.Find("AudioM").GetComponent<AudioSource>().volume = 0f;
+        if (PlayerPrefs.GetInt("musicTracker") == 0) MusicOn();
+        else MusicOff();
+    }
+
+    void MusicOn()
+    {
+        musicB.GetComponent<Image>().sprite = musicOnSprite;
+        GameObject.Find("AudioM").GetComponent<AudioSource>().volume = 0.696f;
         PlayerPrefs.SetInt("musicTracker", 1);
     }
-
-    void ToggleMusicOn()
+    void MusicOff()
     {
-        musicOnB.SetActive(true);
-        musicOffB.SetActive(false);
-        GameObject.Find("AudioM").GetComponent<AudioSource>().volume = 0.696f;
+        musicB.GetComponent<Image>().sprite = musicOffSprite;
+        GameObject.Find("AudioM").GetComponent<AudioSource>().volume = 0f;
         PlayerPrefs.SetInt("musicTracker", 0);
     }
 
