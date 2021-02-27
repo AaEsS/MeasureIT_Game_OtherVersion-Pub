@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class Jystck : MonoBehaviour
 {
     Transform player;
-    float speed;
+    public float speed = 30f;
     private bool touchStart = false;
     private Vector2 pointA;
     private Vector2 pointB;
@@ -24,8 +24,6 @@ public class Jystck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speed = 30f / Time.timeScale;
-
         if (EventSystem.current.IsPointerOverGameObject() || EventSystem.current.currentSelectedGameObject != null) return;
         if (GameObject.Find("Timer") == null || GameObject.Find("Timer").GetComponent<TimerWin>().howMuchTime >= 0f)
         {
@@ -51,7 +49,7 @@ public class Jystck : MonoBehaviour
             if (touchStart)
             {
                 Vector2 offset = pointB - pointA;
-                Vector2 direction = Vector2.ClampMagnitude(offset, 0.1f);
+                Vector2 direction = Vector2.ClampMagnitude(offset, 0.3f);
                 moveCharacter(direction);
 
                 handle.transform.position = new Vector2(pointA.x + direction.x, pointA.y + direction.y);
