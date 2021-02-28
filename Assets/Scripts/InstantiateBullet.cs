@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using TMPro;
 
 public class InstantiateBullet : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class InstantiateBullet : MonoBehaviour
 
     float fireRate;
     float nextFire;
+
+    public TextMeshProUGUI score;
+    int shots = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +38,8 @@ public class InstantiateBullet : MonoBehaviour
         {
             Instantiate(bullet, transform.position, transform.rotation); //, ,Quaternion.identity
             nextFire = Time.time + fireRate;
+            score.SetText($"{shots}");
+            shots++;
         }
     }
 }

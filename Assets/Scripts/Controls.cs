@@ -15,7 +15,7 @@ public class Controls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(joystick.Horizontal, joystick.Vertical) / (Time.timeScale == 0 ? 1 : Time.timeScale) * 400f * Time.deltaTime;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(joystick.Horizontal, joystick.Vertical) / (Time.timeScale == 0 ? 1 : Time.timeScale) * 2.5f;
 
         if (Input.touchCount > 0)
             if (EventSystem.current.IsPointerOverGameObject() || EventSystem.current.currentSelectedGameObject != null) return;
@@ -37,7 +37,7 @@ public class Controls : MonoBehaviour
             if (HP <= 1)
             {
                 Time.timeScale = 1f;
-                Destroy(GameObject.Find("Player"));
+                Destroy(gameObject);
                 Destroy(GameObject.Find("ShooterPivot").GetComponent<FacePlayer>());
                 Destroy(GameObject.Find("Shooter").GetComponent<InstantiateBullet>());
                 foreach (var bllet in GameObject.FindGameObjectsWithTag("Bullet")) Destroy(bllet);
