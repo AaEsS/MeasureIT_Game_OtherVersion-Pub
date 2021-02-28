@@ -41,9 +41,10 @@ public class Controls : MonoBehaviour
                 Destroy(GameObject.Find("ShooterPivot").GetComponent<FacePlayer>());
                 Destroy(GameObject.Find("Shooter").GetComponent<InstantiateBullet>());
                 foreach (var bllet in GameObject.FindGameObjectsWithTag("Bullet")) Destroy(bllet);
-                GameObject.Find("Canvas").GetComponent<ButtonS>().RestartAfterDeath();
+                GameObject.Find("GameplayUI").GetComponent<Animator>().SetTrigger("AfterDeathTrig");
                 GameObject.Find("HealthBar").GetComponent<Shake>().ShakeIt(0.8f);
                 GameObject.Find("HealthBar").GetComponent<HealthBarScript>().SetHealth(HP - 1);
+                GameObject.Find("AudioM").GetComponent<AudioSource>().Stop();
             }
             else
             {

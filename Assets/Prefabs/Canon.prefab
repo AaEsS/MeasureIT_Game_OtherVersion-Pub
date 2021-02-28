@@ -94,9 +94,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f76caaa91f9a1c47b61bf01d9e55be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMScript: {fileID: 0}
   slowMoInSound: {fileID: 8300000, guid: 4e52e9fda6efcd145956e415b22ad593, type: 3}
   bullet: {fileID: 1038999095066220788, guid: 84b755008a6de4f4cb25033f51449db3, type: 3}
+  score: {fileID: 0}
 --- !u!1 &6547604358881620800
 GameObject:
   m_ObjectHideFlags: 0

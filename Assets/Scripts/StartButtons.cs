@@ -23,7 +23,7 @@ public class StartButtons : MonoBehaviour
         if (!GameObject.Find("AudioM").GetComponent<AudioSource>().isPlaying)
             GameObject.Find("AudioM").GetComponent<AudioSource>().Play();
 
-        if (PlayerPrefs.GetInt("musicTracker") == 0) MusicOff();
+        if (PlayerPrefs.GetInt("musicTracker", 1) == 0) MusicOff();
         else MusicOn();
     }
 

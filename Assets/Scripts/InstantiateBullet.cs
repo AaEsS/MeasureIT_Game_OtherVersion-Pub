@@ -15,6 +15,8 @@ public class InstantiateBullet : MonoBehaviour
     public TextMeshProUGUI score;
     int shots = 0;
 
+    float timeToStart = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +29,10 @@ public class InstantiateBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (timeToStart < 4.1f) timeToStart += Time.deltaTime;
+        if (PlayerPrefs.GetInt("BestScore", 0) < shots) PlayerPrefs.SetInt("BestScore", shots - 1);
         // if (SceneManager.GetActiveScene().name == "1" && PlayerPrefs.GetInt("lvlReached") < 2)
-        CheckIfTimeToFire();
+        if (timeToStart > 4f) CheckIfTimeToFire();
         // slowMoInSoundPlayer.PlayOneShot(slowMoInSound);
     }
 

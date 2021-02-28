@@ -1,6 +1,7 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ButtonS : MonoBehaviour
 {
@@ -11,11 +12,6 @@ public class ButtonS : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (PlayerPrefs.GetInt("lvlReached") > SceneManager.GetActiveScene().buildIndex - 1)
-        {
-            foreach (GameObject canon in GameObject.FindGameObjectsWithTag("Canon"))
-                canon.GetComponent<CanonMvt>().frequency = 0.1f;
-        }
         if (PlayerPrefs.GetInt("musicTracker") == 0) MusicOff();
         else MusicOn();
     }
@@ -33,6 +29,11 @@ public class ButtonS : MonoBehaviour
         {
             if (gamePaused) ResumeGame();
             else PauseGame();
+        }
+
+        if (GameObject.Find("Player") == null)
+        {
+            GameObject.Find("BestScore").GetComponent<TextMeshProUGUI>().SetText($"best score\n{PlayerPrefs.GetInt("BestScore")}");
         }
     }
 
