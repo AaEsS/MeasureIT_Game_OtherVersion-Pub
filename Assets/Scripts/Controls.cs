@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Controls : MonoBehaviour
 {
-    public int HP = 3;
+    public int HP;
     bool hitNotDead = false;
     float damageEffectTime = 0f;
 
@@ -11,6 +12,11 @@ public class Controls : MonoBehaviour
     public Sprite jz;
 
     public Joystick joystick;
+
+    private void Start()
+    {
+        HP = (int)GameObject.Find("HealthBar").GetComponent<Slider>().value;
+    }
 
     // Update is called once per frame
     void Update()
@@ -37,7 +43,7 @@ public class Controls : MonoBehaviour
             if (HP <= 1)
             {
                 Time.timeScale = 1f;
-                Destroy(gameObject);
+                GetComponent<SpriteRenderer>().enabled = false;
                 Destroy(GameObject.Find("ShooterPivot").GetComponent<FacePlayer>());
                 Destroy(GameObject.Find("Shooter").GetComponent<InstantiateBullet>());
                 foreach (var bllet in GameObject.FindGameObjectsWithTag("Bullet")) Destroy(bllet);
@@ -52,7 +58,7 @@ public class Controls : MonoBehaviour
                 GameObject.Find("HealthBar").GetComponent<Shake>().ShakeIt(0.5f);
                 GameObject.Find("HealthBar").GetComponent<HealthBarScript>().SetHealth(HP - 1);
                 HP -= 1;
-                GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.5f);
+                GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.7f);
                 GetComponent<BoxCollider2D>().enabled = false;
                 GetComponent<SpriteRenderer>().sprite = jzScared;
                 damageEffectTime = 0f;

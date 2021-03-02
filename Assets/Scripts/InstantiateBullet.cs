@@ -3,7 +3,6 @@ using TMPro;
 
 public class InstantiateBullet : MonoBehaviour
 {
-    AudioSource slowMoInSoundPlayer;
     public AudioClip slowMoInSound;
     
     [SerializeField]
@@ -13,7 +12,7 @@ public class InstantiateBullet : MonoBehaviour
     float nextFire;
 
     public TextMeshProUGUI score;
-    int shots = 0;
+    public int shots = 0;
 
     float timeToStart = 0;
 
@@ -22,8 +21,6 @@ public class InstantiateBullet : MonoBehaviour
     {
         fireRate = 1f;
         nextFire = Time.time;
-
-        slowMoInSoundPlayer = gameObject.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,9 +28,7 @@ public class InstantiateBullet : MonoBehaviour
     {
         if (timeToStart < 4.1f) timeToStart += Time.deltaTime;
         if (PlayerPrefs.GetInt("BestScore", 0) < shots) PlayerPrefs.SetInt("BestScore", shots - 1);
-        // if (SceneManager.GetActiveScene().name == "1" && PlayerPrefs.GetInt("lvlReached") < 2)
         if (timeToStart > 4f) CheckIfTimeToFire();
-        // slowMoInSoundPlayer.PlayOneShot(slowMoInSound);
     }
 
     void CheckIfTimeToFire()
