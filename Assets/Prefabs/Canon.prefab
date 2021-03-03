@@ -97,6 +97,7 @@ MonoBehaviour:
   slowMoInSound: {fileID: 8300000, guid: 4e52e9fda6efcd145956e415b22ad593, type: 3}
   bullet: {fileID: 1038999095066220788, guid: 84b755008a6de4f4cb25033f51449db3, type: 3}
   score: {fileID: 0}
+  shots: 0
 --- !u!1 &6547604358881620800
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +218,7 @@ MonoBehaviour:
   frequency: 0
   magnitude: 0
   offset: 0
+  rightWall: {fileID: 0}
 --- !u!1 &6547604359187288780
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,3 +285,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769f969acddf2d7489b64f0ae7f84925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}

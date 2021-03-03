@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class FacePlayer : MonoBehaviour
 {
-    Transform target;
-    float fovCanonAngle;
-
-    private void Start()
-    {
-        target = GameObject.Find("Player").transform;
-    }
+    public Transform target;
 
     // Update is called once per frame
     void Update()
     {
         FacingPlayer();
-        //if (gameObject.transform.localRotation.z < 0.5f && gameObject.transform.localRotation.z > -0.5f) FacingPlayer();
     }
 
     void FacingPlayer()

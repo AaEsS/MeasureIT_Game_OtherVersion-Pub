@@ -6,10 +6,14 @@ using TMPro;
 public class ButtonS : MonoBehaviour
 {
     public static bool gamePaused = false;
+
+    public SpriteRenderer playerSpriteRender;
     public GameObject pauseMenuUI, musicB;
     public Sprite musicOnSprite, musicOffSprite;
+    public TextMeshProUGUI continueByAdText, bestScoreText;
+    public Animator gameplayeUIAnimator;
 
-    float timeForContinue = 7f;
+    public float timeForContinue = 7f;
 
     public InstantiateBullet shooter;
 
@@ -38,34 +42,34 @@ public class ButtonS : MonoBehaviour
             else PauseGame();
         }
 
-        if (GameObject.Find("Player").GetComponent<SpriteRenderer>().enabled == false)
+        if (playerSpriteRender.enabled == false)
         {
             if (timeForContinue >= 0f)
             {
                 timeForContinue -= Time.deltaTime;
-                GameObject.Find("Continue?").GetComponent<TextMeshProUGUI>().SetText($"<size=%150>{Mathf.Round(timeForContinue)}</size>\n\n<size=%70>Continue?</size>\n<size=%40>(Ad)</size>");
+                continueByAdText.SetText($"<size=%150>{Mathf.Round(timeForContinue)}</size>\n\n<size=%70>Continue?</size>\n<size=%40>(Ad)</size>");
             }
             else
             {
-                GameObject.Find("GameplayUI").GetComponent<Animator>().SetTrigger("TimeUp");
+                gameplayeUIAnimator.SetTrigger("TimeUp");
                 Invoke("ShowScore", 1f);
             }
         }
 
-        if (scaleSize) Invoke("ShowShotsSurvived", 1f);
+        if (scaleSize) Invoke("ShowShotsSurvived", 0.3f);
     }
 
-    void ShowScore()
+    public void ShowScore()
     {
         scaleSize = true;
-        GameObject.Find("GameplayUI").GetComponent<Animator>().SetTrigger("ShowScore");
-        GameObject.Find("BestScore").GetComponent<TextMeshProUGUI>().SetText($"best score\n{PlayerPrefs.GetInt("BestScore")}");
+        gameplayeUIAnimator.SetTrigger("ShowScore");
+        bestScoreText.SetText($"best score\n{PlayerPrefs.GetInt("BestScore")}");
         shooter.score.SetText($"{shooter.shots-1}\n<size=%{sizeScaler}>shots\nsurvived</size>");
     }
 
     void ShowShotsSurvived()
     {
-        sizeScaler += 1f;
+        sizeScaler += 180f * Time.deltaTime;
         sizeScaler = Mathf.Clamp(sizeScaler, 0, 60);
     }
 

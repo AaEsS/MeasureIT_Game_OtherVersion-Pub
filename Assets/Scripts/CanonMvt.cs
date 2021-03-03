@@ -12,12 +12,14 @@ public class CanonMvt : MonoBehaviour
     public float magnitude;
     public float offset;
 
+    public Transform rightWall;
+
     // Start is called before the first frame update
     void Start()
     {
         startPos = transform.position;
         if (Mathf.Abs(Mathf.Cos(gameObject.transform.localEulerAngles.z * Mathf.Deg2Rad)) != 1 && magnitude != 0)
-            magnitude = 2 * GameObject.Find("ForWalls2").transform.position.x - 6f;
+            magnitude = 2 * rightWall.position.x - 6f;
     }
 
     // Update is called once per frame

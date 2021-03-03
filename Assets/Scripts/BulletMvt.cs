@@ -21,7 +21,7 @@ public class BulletMvt : MonoBehaviour
 
         wallHitSound = gameObject.AddComponent<AudioSource>();
 
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -GameObject.Find("ForWalls2").transform.position.x + 1.481f, GameObject.Find("ForWalls2").transform.position.x - 1.481f), Mathf.Clamp(transform.position.y, -GameObject.Find("Ceiling").transform.position.y + 1.475f, GameObject.Find("Ceiling").transform.position.y - 1.475f));
+        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -GameObject.Find("RightWall").transform.position.x + 1.481f, GameObject.Find("RightWall").transform.position.x - 1.481f), Mathf.Clamp(transform.position.y, -GameObject.Find("Ceiling").transform.position.y + 1.475f, GameObject.Find("Ceiling").transform.position.y - 1.475f));
     }
 
     void OnCollisionEnter2D(Collision2D collision)
