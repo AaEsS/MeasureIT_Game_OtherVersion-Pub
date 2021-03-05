@@ -27,7 +27,6 @@ public class InstantiateBullet : MonoBehaviour
     void Update()
     {
         if (timeToStart < 4.1f) timeToStart += Time.deltaTime;
-        if (PlayerPrefs.GetInt("BestScore", 0) < shots) PlayerPrefs.SetInt("BestScore", shots - 1);
         if (timeToStart > 4f) CheckIfTimeToFire();
     }
 

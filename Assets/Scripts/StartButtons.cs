@@ -1,19 +1,62 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using GooglePlayGames;
 
 public class StartButtons : MonoBehaviour
 {
     public GameObject musicB;
     public Sprite musicOnSprite, musicOffSprite;
+    public Text signText;
 
     public void StartPlaying() => SceneManager.LoadScene("1");
-    public void LoadLevels() => SceneManager.LoadScene("Lvls");
-    public void LoadHowToplay() => SceneManager.LoadScene("HowToPlay");
+    public void SignInOutGooglePlay()
+    {
+        if (PlayGamesPlatform.Instance.IsAuthenticated())
+        {
+            PlayGamesPlatform.Instance.SignOut();
+        }
+        else
+        {
+            Social.localUser.Authenticate(suc =>
+            {
+                if (suc) Debug.Log("Sign in by button");
+                else Debug.Log("error");
+            });
+        }
+    }
+    public void ShowLeaderboard()
+    {
+        if (PlayGamesPlatform.Instance.IsAuthenticated())
+        {
+            Social.ReportScore(PlayerPrefs.GetInt("BestScore"), GPGSIds.leaderboard_best_score, success =>
+            {
+                if (success) Debug.Log("Success");
+                else Debug.Log("Failure");
+            });
+            Social.ShowLeaderboardUI();
+        }
+        else Social.localUser.Authenticate(successAuth =>
+        {
+            if (successAuth)
+            {
+                Social.ReportScore(PlayerPrefs.GetInt("BestScore"), GPGSIds.leaderboard_best_score, success =>
+                {
+                    if (success) Debug.Log("Success");
+                    else Debug.Log("Failure");
+                });
+                Social.ShowLeaderboardUI();
+            }
+            else Debug.Log("Failure to sign in");
+        });
+    }
     public void GTFO() => Application.Quit();
 
     void Update()
     {
+        if (PlayGamesPlatform.Instance.IsAuthenticated()) signText.text = "Sign out of \nGoogle Play";
+        else signText.text = "Sign in with \nGoogle Play";
+
         if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "Start")
             SceneManager.LoadScene("Start");
     }

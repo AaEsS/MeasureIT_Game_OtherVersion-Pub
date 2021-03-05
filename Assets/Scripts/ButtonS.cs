@@ -15,7 +15,7 @@ public class ButtonS : MonoBehaviour
 
     public float timeForContinue = 7f;
 
-    public InstantiateBullet shooter;
+    public InstantiateBullet instantiateBullet;
 
     float sizeScaler = 0;
     bool scaleSize = false;
@@ -61,10 +61,11 @@ public class ButtonS : MonoBehaviour
 
     public void ShowScore()
     {
+        if (PlayerPrefs.GetInt("BestScore", 0) < instantiateBullet.shots) PlayerPrefs.SetInt("BestScore", instantiateBullet.shots - 1);
         scaleSize = true;
         gameplayeUIAnimator.SetTrigger("ShowScore");
         bestScoreText.SetText($"best score\n{PlayerPrefs.GetInt("BestScore")}");
-        shooter.score.SetText($"{shooter.shots-1}\n<size=%{sizeScaler}>shots\nsurvived</size>");
+        instantiateBullet.score.SetText($"{instantiateBullet.shots-1}\n<size=%{sizeScaler}>shots\nsurvived</size>");
     }
 
     void ShowShotsSurvived()
