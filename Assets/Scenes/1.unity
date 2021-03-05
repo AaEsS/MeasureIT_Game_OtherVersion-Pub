@@ -1378,6 +1378,7 @@ MonoBehaviour:
   gameplayeUIAnimator: {fileID: 511971264}
   buttonS: {fileID: 239089829}
   continueByAd: {fileID: 1263629976}
+  continueByAdText: {fileID: 786270579}
   testMode: 1
   revived: 0
 --- !u!4 &597653689
@@ -3544,6 +3545,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2205649457132840957, guid: 9e286692216c19a45be2c0b7606a8312,
+        type: 3}
+      propertyPath: buttonS
+      value: 
+      objectReference: {fileID: 239089829}
     - target: {fileID: 2205649457132840957, guid: 9e286692216c19a45be2c0b7606a8312,
         type: 3}
       propertyPath: joystick
