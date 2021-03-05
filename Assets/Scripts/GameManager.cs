@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
-using TMPro;
 
 public class GameManager : MonoBehaviour, IUnityAdsListener
 {
@@ -11,7 +10,6 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
     public Animator gameplayeUIAnimator;
     public ButtonS buttonS;
     public Button continueByAd;
-    public TextMeshProUGUI continueByAdText;
 
     private string gameId = "4034219";
     private string rewardedVideoId = "rewardedVideo";
@@ -23,15 +21,14 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
     void Start()
     {
         Advertisement.Initialize(gameId, testMode);
+        continueByAd.interactable = Advertisement.IsReady(rewardedVideoId);
         Advertisement.AddListener(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        continueByAd.interactable = Advertisement.IsReady(rewardedVideoId);
-        if (continueByAd.interactable) continueByAdText.SetText($"<size=%150>{Mathf.Round(buttonS.timeForContinue)}</size>\n\n<size=%70>Continue?</size>\n<size=%40>(Ad)</size>");
-        else continueByAdText.SetText($"<size=%150>{Mathf.Round(buttonS.timeForContinue)}</size>\n\n<size=%70>Continue?</size>\n<size=%40>(Ad)</size> <size=%30>network error</size>");
+        
     }
 
     public void ShowRewardedVideo()
@@ -53,19 +50,7 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
             Advertisement.RemoveListener(this);
             Revive();
         }
-        else if (showResult == ShowResult.Skipped)
-        {
-            Advertisement.RemoveListener(this);
-            gameplayeUIAnimator.SetTrigger("TimeUp");
-            buttonS.timeForContinue = 0f;
-        }
-        else if (showResult == ShowResult.Failed)
-        {
-            Advertisement.RemoveListener(this);
-            gameplayeUIAnimator.SetTrigger("TimeUp");
-            buttonS.timeForContinue = 0f;
-            Debug.LogWarning("The ad failed to be shown due to an error.");
-        }
+        else if (showResult == ShowResult.Failed) Debug.LogWarning("The ad failed to be shown due to an error.");
     }
 
     public void Revive()

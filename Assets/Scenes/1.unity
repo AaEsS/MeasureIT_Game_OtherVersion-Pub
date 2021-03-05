@@ -1378,7 +1378,6 @@ MonoBehaviour:
   gameplayeUIAnimator: {fileID: 511971264}
   buttonS: {fileID: 239089829}
   continueByAd: {fileID: 1263629976}
-  continueByAdText: {fileID: 786270579}
   testMode: 1
   revived: 0
 --- !u!4 &597653689

@@ -8,7 +8,8 @@ public class StartButtons : MonoBehaviour
     public Sprite musicOnSprite, musicOffSprite;
 
     public void StartPlaying() => SceneManager.LoadScene("1");
-    public void LoadLeaderboard() => GooglePlay.ShowLeaderboard(GPGSIds.leaderboard_best_score);
+    public void LoadLevels() => SceneManager.LoadScene("Lvls");
+    public void LoadHowToplay() => SceneManager.LoadScene("HowToPlay");
     public void GTFO() => Application.Quit();
 
     void Update()
