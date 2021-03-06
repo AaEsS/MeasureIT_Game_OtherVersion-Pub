@@ -1694,11 +1694,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Sign in and submit
+  m_text: 'Sign in to display
 
-    your best score
-
-    to the leaderboard!'
+    your best score'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 76d7e2f4b04060b4bb0f9e7bb4991edd, type: 2}
   m_sharedMaterial: {fileID: 8336239924879650562, guid: 76d7e2f4b04060b4bb0f9e7bb4991edd,
@@ -1726,8 +1724,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.2
-  m_fontSizeBase: 35.2
+  m_fontSize: 46.3
+  m_fontSizeBase: 46.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3519,8 +3517,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -602.7}
-  m_SizeDelta: {x: 485.8, y: 172.5}
+  m_AnchoredPosition: {x: 0, y: 91.5}
+  m_SizeDelta: {x: 502, y: 199.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2075454954
 MonoBehaviour:
@@ -3566,7 +3564,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 239089829}
-        m_MethodName: SubmitBestScoreWhenSignedOut
+        m_MethodName: SubmitScoreWhenSignedOut
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

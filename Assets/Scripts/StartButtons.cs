@@ -29,22 +29,12 @@ public class StartButtons : MonoBehaviour
     {
         if (PlayGamesPlatform.Instance.IsAuthenticated())
         {
-            Social.ReportScore(PlayerPrefs.GetInt("BestScore"), GPGSIds.leaderboard_best_score, success =>
-            {
-                if (success) Debug.Log("Success");
-                else Debug.Log("Failure");
-            });
             Social.ShowLeaderboardUI();
         }
         else Social.localUser.Authenticate(successAuth =>
         {
             if (successAuth)
             {
-                Social.ReportScore(PlayerPrefs.GetInt("BestScore"), GPGSIds.leaderboard_best_score, success =>
-                {
-                    if (success) Debug.Log("Success");
-                    else Debug.Log("Failure");
-                });
                 Social.ShowLeaderboardUI();
             }
             else Debug.Log("Failure to sign in");

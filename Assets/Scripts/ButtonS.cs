@@ -2,13 +2,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 
 public class ButtonS : MonoBehaviour
 {
     public static bool gamePaused = false;
 
     public SpriteRenderer playerSpriteRender;
-    public GameObject pauseMenuUI, musicB;
+    public GameObject pauseMenuUI, musicB, submitBestScoreB;
     public Sprite musicOnSprite, musicOffSprite;
     public TextMeshProUGUI continueByAdText, bestScoreText;
     public Animator gameplayeUIAnimator;
@@ -19,6 +21,8 @@ public class ButtonS : MonoBehaviour
 
     float sizeScaler = 0;
     bool scaleSize = false;
+
+    bool scoreSubmitted = false;
 
     // Start is called before the first frame update
     void Start()
@@ -61,11 +65,64 @@ public class ButtonS : MonoBehaviour
 
     public void ShowScore()
     {
-        if (PlayerPrefs.GetInt("BestScore", 0) < instantiateBullet.shots) PlayerPrefs.SetInt("BestScore", instantiateBullet.shots - 1);
+        if (PlayGamesPlatform.Instance.IsAuthenticated() && scoreSubmitted == false)
+        {
+            Social.ReportScore(instantiateBullet.shots - 1, GPGSIds.leaderboard_best_score, success =>
+            {
+                if (success) scoreSubmitted = true;
+                else Debug.Log("Failure");
+            });
+        }
+
+        if (PlayGamesPlatform.Instance.IsAuthenticated())
+        {
+            if (scoreSubmitted)
+            {
+                PlayGamesPlatform.Instance.LoadScores(GPGSIds.leaderboard_best_score,
+                LeaderboardStart.PlayerCentered, 1,
+                LeaderboardCollection.Public,
+                LeaderboardTimeSpan.AllTime,
+                (LeaderboardScoreData data) =>
+                {
+                    bestScoreText.SetText($"best score\n{data.PlayerScore.formattedValue}");
+                });
+            }
+            if (submitBestScoreB.activeSelf) submitBestScoreB.SetActive(false);
+        }
+        else
+        {
+            bestScoreText.SetText("");
+            submitBestScoreB.SetActive(true);
+        }
+    
+        //if (PlayerPrefs.GetInt("BestScore", 0) < instantiateBullet.shots) PlayerPrefs.SetInt("BestScore", instantiateBullet.shots - 1);
         scaleSize = true;
         gameplayeUIAnimator.SetTrigger("ShowScore");
-        bestScoreText.SetText($"best score\n{PlayerPrefs.GetInt("BestScore")}");
         instantiateBullet.score.SetText($"{instantiateBullet.shots-1}\n<size=%{sizeScaler}>shots\nsurvived</size>");
+    }
+
+    public void SubmitScoreWhenSignedOut()
+    {
+        if (PlayGamesPlatform.Instance.IsAuthenticated()) submitBestScoreB.SetActive(false);
+        else if (scoreSubmitted == false)
+        {
+            Social.localUser.Authenticate(suc =>
+            {
+                if (suc)
+                {
+                    Social.ReportScore(instantiateBullet.shots - 1, GPGSIds.leaderboard_best_score, success =>
+                    {
+                        if (success)
+                        {
+                            scoreSubmitted = true;
+                            submitBestScoreB.SetActive(false);
+                        }
+                        else Debug.Log("Failure");
+                    });
+                }
+                else Debug.Log("error");
+            });
+        }
     }
 
     void ShowShotsSurvived()
