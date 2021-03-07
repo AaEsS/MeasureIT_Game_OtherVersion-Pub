@@ -9,13 +9,11 @@ public class ButtonS : MonoBehaviour
 {
     public static bool gamePaused = false;
 
-    public SpriteRenderer playerSpriteRender;
+    public GameObject player;
     public GameObject pauseMenuUI, musicB, submitBestScoreB;
     public Sprite musicOnSprite, musicOffSprite;
-    public TextMeshProUGUI continueByAdText, bestScoreText;
+    public TextMeshProUGUI bestScoreText;
     public Animator gameplayeUIAnimator;
-
-    public float timeForContinue = 7f;
 
     public InstantiateBullet instantiateBullet;
 
@@ -40,31 +38,39 @@ public class ButtonS : MonoBehaviour
             Restart();
         }
 
+        if (gamePaused)
+            foreach (GameObject powerupB in GameObject.FindGameObjectsWithTag("PowerupButton"))
+                powerupB.GetComponent<Button>().interactable = false;
+        else foreach (GameObject powerupB in GameObject.FindGameObjectsWithTag("PowerupButton"))
+                powerupB.GetComponent<Button>().interactable = true;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (gamePaused) ResumeGame();
             else PauseGame();
         }
 
-        if (playerSpriteRender.enabled == false)
+        if (player.GetComponent<SpriteRenderer>().enabled == false)
         {
-            if (timeForContinue >= 0f)
-            {
-                timeForContinue -= Time.deltaTime;
-                continueByAdText.SetText($"<size=%150>{Mathf.Round(timeForContinue)}</size>\n\n<size=%70>Continue?</size>\n<size=%40>(Ad)</size>");
-            }
-            else
-            {
-                gameplayeUIAnimator.SetTrigger("TimeUp");
-                Invoke("ShowScore", 1f);
-            }
+            foreach (GameObject powerupB in GameObject.FindGameObjectsWithTag("PowerupButton"))
+                powerupB.GetComponent<Button>().interactable = false;
         }
 
-        if (scaleSize) Invoke("ShowShotsSurvived", 0.3f);
+        if (scaleSize)
+        {
+            Invoke("ShowShotsSurvived", 1f);
+        }
     }
 
     public void ShowScore()
     {
+        scaleSize = true;
+        gameplayeUIAnimator.SetTrigger("TimeUp");
+        Invoke("ShowScoreAnimMethod", 1f);
+
+        foreach (GameObject powerupB in GameObject.FindGameObjectsWithTag("PowerupButton"))
+            Destroy(powerupB);
+
         if (PlayGamesPlatform.Instance.IsAuthenticated() && scoreSubmitted == false)
         {
             Social.ReportScore(instantiateBullet.shots - 1, GPGSIds.leaderboard_best_score, success =>
@@ -94,11 +100,11 @@ public class ButtonS : MonoBehaviour
             bestScoreText.SetText("");
             submitBestScoreB.SetActive(true);
         }
-    
-        //if (PlayerPrefs.GetInt("BestScore", 0) < instantiateBullet.shots) PlayerPrefs.SetInt("BestScore", instantiateBullet.shots - 1);
-        scaleSize = true;
+    }
+
+    void ShowScoreAnimMethod()
+    {
         gameplayeUIAnimator.SetTrigger("ShowScore");
-        instantiateBullet.score.SetText($"{instantiateBullet.shots-1}\n<size=%{sizeScaler}>shots\nsurvived</size>");
     }
 
     public void SubmitScoreWhenSignedOut()
@@ -129,6 +135,7 @@ public class ButtonS : MonoBehaviour
     {
         sizeScaler += 180f * Time.deltaTime;
         sizeScaler = Mathf.Clamp(sizeScaler, 0, 60);
+        instantiateBullet.score.SetText($"{instantiateBullet.shots - 1}\n<size=%{sizeScaler}>shots\nsurvived</size>");
     }
 
     public void ResumeGame()

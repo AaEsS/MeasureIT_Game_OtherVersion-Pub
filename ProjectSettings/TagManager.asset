@@ -9,7 +9,7 @@ TagManager:
   - ShooterPivot
   - Shooter
   - Canon
-  - Collectable
+  - PowerupButton
   layers:
   - Default
   - TransparentFX

@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
     // Update is called once per frame
     void Update()
     {
-        if (continueByAd.interactable) continueByAdText.SetText($"<size=%150>{Mathf.Round(buttonS.timeForContinue)}</size>\n\n<size=%70>Continue?</size>\n<size=%40>(Ad)</size>");
-        else continueByAdText.SetText($"<size=%150>{Mathf.Round(buttonS.timeForContinue)}</size>\n\n<size=%70>Continue?</size>\n<size=%40>(Ad)</size> <size=%30>network error</size>");
+        if (continueByAd.interactable) continueByAdText.SetText($"<size=%70>Continue?</size>\n<size=%40>(Ad)</size>");
+        else continueByAdText.SetText($"<size=%70>Continue?</size>\n<size=%40>(Ad)</size> <size=%30>network error</size>");
     }
 
     public void ShowRewardedVideo()
@@ -56,14 +56,12 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
         else if (showResult == ShowResult.Skipped)
         {
             Advertisement.RemoveListener(this);
-            gameplayeUIAnimator.SetTrigger("TimeUp");
-            buttonS.timeForContinue = 0f;
+            buttonS.ShowScore();
         }
         else if (showResult == ShowResult.Failed)
         {
             Advertisement.RemoveListener(this);
-            gameplayeUIAnimator.SetTrigger("TimeUp");
-            buttonS.timeForContinue = 0f;
+            buttonS.ShowScore();
             Debug.LogWarning("The ad failed to be shown due to an error.");
         }
     }
@@ -74,6 +72,8 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
 
         player.GetComponent<SpriteRenderer>().enabled = true;
         player.GetComponent<Animator>().SetBool("Reviving", true);
+        foreach (GameObject powerupB in GameObject.FindGameObjectsWithTag("PowerupButton"))
+            powerupB.GetComponent<Button>().interactable = true;
 
         gameplayeUIAnimator.SetTrigger("TimeUp");
         GameObject.Find("AudioM").GetComponent<AudioSource>().UnPause();
@@ -83,7 +83,6 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
         player.GetComponent<Controls>().HP = (int)healthBar.GetComponent<Slider>().value;
 
         revived = true;
-        buttonS.timeForContinue = 0f;
         Invoke("CanonFixed", 3f);
     }
 

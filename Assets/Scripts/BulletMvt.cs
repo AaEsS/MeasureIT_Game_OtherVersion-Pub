@@ -40,7 +40,7 @@ public class BulletMvt : MonoBehaviour
     {
         if (trigg.gameObject.CompareTag("Player"))
         {
-            if (trigg.gameObject.GetComponent<Controls>().HP <= 1)
+            if (trigg.gameObject.GetComponent<Controls>().HP == 1)
             {
                 Time.timeScale = 1f;
                 AudioSource.PlayClipAtPoint(DSound, transform.position);
