@@ -7,7 +7,7 @@ using GooglePlayGames.BasicApi;
 
 public class ButtonS : MonoBehaviour
 {
-    public static bool gamePaused = false;
+    public bool gamePaused = false;
 
     public GameObject player;
     public GameObject pauseMenuUI, musicB, submitBestScoreB;
@@ -21,6 +21,7 @@ public class ButtonS : MonoBehaviour
     bool scaleSize = false;
 
     bool scoreSubmitted = false;
+    bool scoreRetrieved = false;
 
     // Start is called before the first frame update
     void Start()
@@ -39,11 +40,20 @@ public class ButtonS : MonoBehaviour
         }
 
         if (gamePaused)
+        {
             foreach (GameObject powerupB in GameObject.FindGameObjectsWithTag("PowerupButton"))
                 powerupB.GetComponent<Button>().interactable = false;
-        else foreach (GameObject powerupB in GameObject.FindGameObjectsWithTag("PowerupButton"))
+            if (player.GetComponent<Controls>().shieldSoundPlayer.isPlaying) player.GetComponent<Controls>().shieldSoundPlayer.Pause();
+            if (player.GetComponent<Controls>().fireSoundPlayer.isPlaying) player.GetComponent<Controls>().fireSoundPlayer.Pause();
+        }
+        else
+        {
+            foreach (GameObject powerupB in GameObject.FindGameObjectsWithTag("PowerupButton"))
                 powerupB.GetComponent<Button>().interactable = true;
-
+            if (!player.GetComponent<Controls>().shieldSoundPlayer.isPlaying) player.GetComponent<Controls>().shieldSoundPlayer.UnPause();
+            if (!player.GetComponent<Controls>().fireSoundPlayer.isPlaying) player.GetComponent<Controls>().fireSoundPlayer.UnPause();
+        }
+            
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (gamePaused) ResumeGame();
@@ -58,6 +68,7 @@ public class ButtonS : MonoBehaviour
 
         if (scaleSize)
         {
+            ShowScore();
             Invoke("ShowShotsSurvived", 1f);
         }
     }
@@ -71,18 +82,18 @@ public class ButtonS : MonoBehaviour
         foreach (GameObject powerupB in GameObject.FindGameObjectsWithTag("PowerupButton"))
             Destroy(powerupB);
 
-        if (PlayGamesPlatform.Instance.IsAuthenticated() && scoreSubmitted == false)
-        {
-            Social.ReportScore(instantiateBullet.shots - 1, GPGSIds.leaderboard_best_score, success =>
-            {
-                if (success) scoreSubmitted = true;
-                else Debug.Log("Failure");
-            });
-        }
-
         if (PlayGamesPlatform.Instance.IsAuthenticated())
         {
-            if (scoreSubmitted)
+            if (scoreSubmitted == false)
+            {
+                Social.ReportScore(instantiateBullet.shots - 1, GPGSIds.leaderboard_best_score, success =>
+                {
+                    if (success) scoreSubmitted = true;
+                    else Debug.Log("Failure");
+                });
+            }
+
+            if (scoreSubmitted && scoreRetrieved == false)
             {
                 PlayGamesPlatform.Instance.LoadScores(GPGSIds.leaderboard_best_score,
                 LeaderboardStart.PlayerCentered, 1,
@@ -91,6 +102,7 @@ public class ButtonS : MonoBehaviour
                 (LeaderboardScoreData data) =>
                 {
                     bestScoreText.SetText($"best score\n{data.PlayerScore.formattedValue}");
+                    scoreRetrieved = true;
                 });
             }
             if (submitBestScoreB.activeSelf) submitBestScoreB.SetActive(false);
@@ -179,13 +191,13 @@ public class ButtonS : MonoBehaviour
     void MusicOn()
     {
         musicB.GetComponent<Image>().sprite = musicOnSprite;
-        GameObject.Find("AudioM").GetComponent<AudioSource>().volume = 0.696f;
+        GameObject.Find("AudioM").GetComponent<MusicScript>().hajjamiPlay.volume = 0.696f;
         PlayerPrefs.SetInt("musicTracker", 1);
     }
     void MusicOff()
     {
         musicB.GetComponent<Image>().sprite = musicOffSprite;
-        GameObject.Find("AudioM").GetComponent<AudioSource>().volume = 0f;
+        GameObject.Find("AudioM").GetComponent<MusicScript>().hajjamiPlay.volume = 0f;
         PlayerPrefs.SetInt("musicTracker", 0);
     }
 

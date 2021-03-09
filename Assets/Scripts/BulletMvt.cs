@@ -8,10 +8,10 @@ public class BulletMvt : MonoBehaviour
     Vector3 dir;
 
     AudioSource wallHitSound;
-    public AudioClip WHSound;
-    public AudioClip DSound;
-    public AudioClip HitSound;
+    public AudioClip WHSound, DSound, HitSound, bulletBurntSound;
     GameObject[] bullets;
+
+    public GameObject bulletBurntEffectPrefab;
 
     void Start()
     {
@@ -40,16 +40,26 @@ public class BulletMvt : MonoBehaviour
     {
         if (trigg.gameObject.CompareTag("Player"))
         {
-            if (trigg.gameObject.GetComponent<Controls>().HP == 1)
+            if (trigg.gameObject.GetComponent<Controls>().onFire == false)
             {
-                Time.timeScale = 1f;
-                AudioSource.PlayClipAtPoint(DSound, transform.position);
-                foreach (GameObject bullet in bullets)
-                    Destroy(bullet);
+                if (trigg.gameObject.GetComponent<Controls>().HP == 1)
+                {
+                    Time.timeScale = 1f;
+                    AudioSource.PlayClipAtPoint(DSound, transform.position);
+                    foreach (GameObject bullet in bullets)
+                        Destroy(bullet);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(HitSound, transform.position);
+                }
             }
             else
             {
-                AudioSource.PlayClipAtPoint(HitSound, transform.position);
+                AudioSource.PlayClipAtPoint(bulletBurntSound, transform.position);
+                GameObject bulletBurntEffect = Instantiate(bulletBurntEffectPrefab, transform.position, Quaternion.identity);
+                Destroy(bulletBurntEffect, 5f);
+                Destroy(gameObject);
             }
         }
     }

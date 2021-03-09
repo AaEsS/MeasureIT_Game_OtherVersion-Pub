@@ -138,6 +138,9 @@ MonoBehaviour:
   WHSound: {fileID: 8300000, guid: 12737c524a62ed84e85760f0ca941637, type: 3}
   DSound: {fileID: 8300000, guid: 3c0c7f3bce4ecba419aa36db3b42e309, type: 3}
   HitSound: {fileID: 8300000, guid: e4c3af59eb9598b45b4b27af00824a8e, type: 3}
+  bulletBurntSound: {fileID: 8300000, guid: 61416fc11ddfbbf488fa75741fd5c62b, type: 3}
+  bulletBurntEffectPrefab: {fileID: 8415950770699962847, guid: 09cef2c4a914ecb4091f9fbde29bc894,
+    type: 3}
 --- !u!114 &-2783607312965040742
 MonoBehaviour:
   m_ObjectHideFlags: 0

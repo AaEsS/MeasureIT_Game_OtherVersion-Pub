@@ -13,10 +13,10 @@ public class ClampPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (!GameObject.Find("AudioM").GetComponent<AudioSource>().isPlaying)
+        if (!GameObject.Find("AudioM").GetComponent<MusicScript>().hajjamiPlay.isPlaying)
         {
-            GameObject.Find("AudioM").GetComponent<AudioSource>().Stop();
-            GameObject.Find("AudioM").GetComponent<AudioSource>().Play();
+            GameObject.Find("AudioM").GetComponent<MusicScript>().hajjamiPlay.Stop();
+            GameObject.Find("AudioM").GetComponent<MusicScript>().hajjamiPlay.Play();
         }
 
         screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));

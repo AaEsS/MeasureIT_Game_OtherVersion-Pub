@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Audio;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MusicScript : MonoBehaviour
 {
     public static MusicScript instance;
+    public AudioSource hajjamiMain, hajjamiPlay;
+    static bool mainPlayed = false;
+    static bool playPlayed = false;
 
     void Awake()
     {
@@ -17,5 +18,23 @@ public class MusicScript : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "1" && playPlayed == false)
+        {
+            hajjamiMain.Stop();
+            hajjamiPlay.Play();
+            playPlayed = true;
+            mainPlayed = false;
+        }
+        if (SceneManager.GetActiveScene().name == "Start" && mainPlayed == false)
+        {
+            hajjamiPlay.Stop();
+            hajjamiMain.Play();
+            mainPlayed = true;
+            playPlayed = false;
+        }
     }
 }

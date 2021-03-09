@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
     public ButtonS buttonS;
     public Button continueByAd;
     public TextMeshProUGUI continueByAdText;
+    public Powerups powerupsScript;
 
     private string gameId = "4034219";
     private string rewardedVideoId = "rewardedVideo";
@@ -76,11 +77,13 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
             powerupB.GetComponent<Button>().interactable = true;
 
         gameplayeUIAnimator.SetTrigger("TimeUp");
-        GameObject.Find("AudioM").GetComponent<AudioSource>().UnPause();
+        GameObject.Find("AudioM").GetComponent<MusicScript>().hajjamiPlay.UnPause();
 
         healthBar.GetComponent<Slider>().maxValue = 5;
         healthBar.GetComponent<Slider>().value = 5;
         player.GetComponent<Controls>().HP = (int)healthBar.GetComponent<Slider>().value;
+
+        powerupsScript.enabled = true;
 
         revived = true;
         Invoke("CanonFixed", 3f);

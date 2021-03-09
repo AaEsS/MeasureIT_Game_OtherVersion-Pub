@@ -82,5 +82,6 @@ public class StartButtons : MonoBehaviour
         PlayerPrefs.SetInt("musicTracker", 0);
     }
 
-    public void BackToStart() => SceneManager.LoadScene("Start");
+    public void OpenYayaChannel() => Application.OpenURL("https://www.youtube.com/channel/UCmahZvO-m3b2Ib5318SmUHA");
+    public void OpenYayaSoundcloud() => Application.OpenURL("https://soundcloud.com/yahya-hajjami");
 }

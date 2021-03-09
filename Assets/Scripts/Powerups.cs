@@ -10,7 +10,16 @@ public class Powerups : MonoBehaviour
     float[] timesOfSpawn;
     float timeBetweenSpawns;
 
-    public GameObject player;
+    public AudioClip healSound;
+
+    public Sprite meShielded;
+    
+    public Transform playerTransform;
+    public SpriteRenderer playerSprite;
+    public CapsuleCollider2D playerCapsuleColl;
+    public CircleCollider2D playerCircleColl;
+    public Controls playerControls;
+    public Animator playerAnimator;
 
     Vector2 randomPos;
 
@@ -18,8 +27,7 @@ public class Powerups : MonoBehaviour
 
     void Start()
     {
-        //timesOfSpawn = new float[5] {3f, 5f, 10f, 15f, 20f};
-        timesOfSpawn = new float[2] {1f, 3f};
+        timesOfSpawn = new float[4] {1f, 3f, 5f, 8f};
         timeBetweenSpawns = timesOfSpawn[Random.Range(0, timesOfSpawn.Length)];
     }
 
@@ -44,33 +52,56 @@ public class Powerups : MonoBehaviour
     {
         if (EventSystem.current.currentSelectedGameObject.name == "HeartPowerup(Clone)")
         {
-            if (EventSystem.current.currentSelectedGameObject.transform.position.x > 199f && EventSystem.current.currentSelectedGameObject.transform.position.x < 201f) player.GetComponent<Controls>().powerupBpos1 = false;
-            if (EventSystem.current.currentSelectedGameObject.transform.position.x > 449f && EventSystem.current.currentSelectedGameObject.transform.position.x < 451f) player.GetComponent<Controls>().powerupBpos2 = false;
-            if (EventSystem.current.currentSelectedGameObject.transform.position.x > 324f && EventSystem.current.currentSelectedGameObject.transform.position.x < 326f) player.GetComponent<Controls>().powerupBpos3 = false;
+            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[0].transform.position) playerControls.powerupBpos1 = false;
+            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[1].transform.position) playerControls.powerupBpos2 = false;
+            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[2].transform.position) playerControls.powerupBpos3 = false;
 
-            player.GetComponent<Controls>().healthBar.GetComponent<Slider>().value++;
+            playerControls.healthBar.GetComponent<Slider>().value++;
+            AudioSource.PlayClipAtPoint(healSound, playerTransform.position);
+            playerControls.powerupsPickupCount--;
 
             Destroy(EventSystem.current.currentSelectedGameObject);
         }
 
-        if (EventSystem.current.currentSelectedGameObject.name == "ShieldPowerup(Clone)")
+        if (EventSystem.current.currentSelectedGameObject.name == "ShieldPowerup(Clone)" && playerControls.shielded == false && playerControls.onFire == false)
         {
-            if (EventSystem.current.currentSelectedGameObject.transform.position.x > 199f && EventSystem.current.currentSelectedGameObject.transform.position.x < 201f) player.GetComponent<Controls>().powerupBpos1 = false;
-            if (EventSystem.current.currentSelectedGameObject.transform.position.x > 449f && EventSystem.current.currentSelectedGameObject.transform.position.x < 451f) player.GetComponent<Controls>().powerupBpos2 = false;
-            if (EventSystem.current.currentSelectedGameObject.transform.position.x > 324f && EventSystem.current.currentSelectedGameObject.transform.position.x < 326f) player.GetComponent<Controls>().powerupBpos3 = false;
+            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[0].transform.position) playerControls.powerupBpos1 = false;
+            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[1].transform.position) playerControls.powerupBpos2 = false;
+            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[2].transform.position) playerControls.powerupBpos3 = false;
+
+            ShieldOnMethod();
+            playerControls.powerupsPickupCount--;
 
             Destroy(EventSystem.current.currentSelectedGameObject);
         }
 
-        if (EventSystem.current.currentSelectedGameObject.name == "FirePowerup(Clone)")
+        if (EventSystem.current.currentSelectedGameObject.name == "FirePowerup(Clone)" && playerControls.onFire == false && playerControls.shielded == false)
         {
-            if (EventSystem.current.currentSelectedGameObject.transform.position.x > 199f && EventSystem.current.currentSelectedGameObject.transform.position.x < 201f) player.GetComponent<Controls>().powerupBpos1 = false;
-            if (EventSystem.current.currentSelectedGameObject.transform.position.x > 449f && EventSystem.current.currentSelectedGameObject.transform.position.x < 451f) player.GetComponent<Controls>().powerupBpos2 = false;
-            if (EventSystem.current.currentSelectedGameObject.transform.position.x > 324f && EventSystem.current.currentSelectedGameObject.transform.position.x < 326f) player.GetComponent<Controls>().powerupBpos3 = false;
+            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[0].transform.position) playerControls.powerupBpos1 = false;
+            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[1].transform.position) playerControls.powerupBpos2 = false;
+            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[2].transform.position) playerControls.powerupBpos3 = false;
+
+            FireOnMethod();
+            playerControls.powerupsPickupCount--;
 
             Destroy(EventSystem.current.currentSelectedGameObject);
         }
+    }
 
-        player.GetComponent<Controls>().powerupsPickupCount--;
+    void FireOnMethod()
+    {
+        playerControls.particleFireEffect.SetActive(true);
+        playerControls.onFire = true;
+        playerControls.firePTime = 5f;
+    }
+
+    void ShieldOnMethod()
+    {
+        playerCapsuleColl.enabled = false;
+        playerCircleColl.enabled = true;
+        playerSprite.sprite = meShielded;
+        playerControls.shielded = true;
+        playerControls.shieldPTime = 5f;
+        playerAnimator.enabled = false;
     }
 }
