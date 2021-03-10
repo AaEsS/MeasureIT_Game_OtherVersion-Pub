@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Controls : MonoBehaviour
 {
+    MusicScript audioMScript;
     public int HP;
     bool deathAfterRevived = false;
 
@@ -41,11 +42,15 @@ public class Controls : MonoBehaviour
 
     public int powerupsPickupCount = 0;
 
+    private void Awake()
+    {
+        audioMScript = GameObject.Find("AudioM").GetComponent<MusicScript>();
+    }
+
     private void Start()
     {
         fireSoundPlayer = gameObject.AddComponent<AudioSource>();
         shieldSoundPlayer = gameObject.AddComponent<AudioSource>();
-        
     }
 
     // Update is called once per frame
@@ -85,7 +90,7 @@ public class Controls : MonoBehaviour
                         gameplayeUIAnimator.SetTrigger("AfterDeathTrig");
                         healthBar.GetComponent<Shake>().ShakeIt(0.8f);
                         healthBar.GetComponent<HealthBarScript>().SetHealth(HP - 1);
-                        GameObject.Find("AudioM").GetComponent<MusicScript>().hajjamiPlay.Pause();
+                        audioMScript.hajjamiLoop.Pause();
                         powerupsScript.enabled = false;
                     }
                     else
@@ -98,7 +103,7 @@ public class Controls : MonoBehaviour
                         canvas.GetComponent<ButtonS>().ShowScore();
                         healthBar.GetComponent<Shake>().ShakeIt(0.8f);
                         healthBar.GetComponent<HealthBarScript>().SetHealth(HP - 1);
-                        GameObject.Find("AudioM").GetComponent<MusicScript>().hajjamiPlay.Pause();
+                        audioMScript.hajjamiLoop.Pause();
                         powerupsScript.enabled = false;
                     }
                 }

@@ -26,8 +26,8 @@ public class InstantiateBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timeToStart < 4.1f) timeToStart += Time.deltaTime;
-        if (timeToStart > 4f) CheckIfTimeToFire();
+        if (timeToStart < 7.7f) timeToStart += Time.deltaTime;
+        if (timeToStart > 7.7f) CheckIfTimeToFire();
     }
 
     void CheckIfTimeToFire()

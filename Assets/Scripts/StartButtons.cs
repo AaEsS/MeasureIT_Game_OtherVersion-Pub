@@ -5,11 +5,16 @@ using GooglePlayGames;
 
 public class StartButtons : MonoBehaviour
 {
+    MusicScript audioMScript;
     public GameObject musicB;
     public Sprite musicOnSprite, musicOffSprite;
     public Text signText;
 
-    public void StartPlaying() => SceneManager.LoadScene("1");
+    public void StartPlaying()
+    {
+        SceneManager.LoadScene("1");
+        MusicScript.introPlayed = false;
+    }
     public void SignInOutGooglePlay()
     {
         if (PlayGamesPlatform.Instance.IsAuthenticated())
@@ -42,6 +47,17 @@ public class StartButtons : MonoBehaviour
     }
     public void GTFO() => Application.Quit();
 
+    private void Awake()
+    {
+        audioMScript = GameObject.Find("AudioM").GetComponent<MusicScript>();
+    }
+
+    void Start()
+    {
+        if (PlayerPrefs.GetInt("musicTracker", 1) == 0) MusicOff();
+        else MusicOn();
+    }
+
     void Update()
     {
         if (PlayGamesPlatform.Instance.IsAuthenticated()) signText.text = "Sign out of \nGoogle Play";
@@ -49,18 +65,6 @@ public class StartButtons : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "Start")
             SceneManager.LoadScene("Start");
-    }
-
-    void Start()
-    {
-        if (!GameObject.Find("AudioM").GetComponent<AudioSource>().isPlaying)
-        {
-            GameObject.Find("AudioM").GetComponent<AudioSource>().Stop();
-            GameObject.Find("AudioM").GetComponent<AudioSource>().Play();
-        }
-
-        if (PlayerPrefs.GetInt("musicTracker", 1) == 0) MusicOff();
-        else MusicOn();
     }
 
     public void ToggleMusic()
@@ -72,13 +76,13 @@ public class StartButtons : MonoBehaviour
     void MusicOn()
     {
         musicB.GetComponent<Image>().sprite = musicOnSprite;
-        GameObject.Find("AudioM").GetComponent<AudioSource>().volume = 0.696f;
+        audioMScript.hajjamiMain.volume = 0.696f;
         PlayerPrefs.SetInt("musicTracker", 1);
     }
     void MusicOff()
     {
         musicB.GetComponent<Image>().sprite = musicOffSprite;
-        GameObject.Find("AudioM").GetComponent<AudioSource>().volume = 0f;
+        audioMScript.hajjamiMain.volume = 0f;
         PlayerPrefs.SetInt("musicTracker", 0);
     }
 

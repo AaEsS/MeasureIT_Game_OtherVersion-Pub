@@ -7,6 +7,8 @@ using GooglePlayGames.BasicApi;
 
 public class ButtonS : MonoBehaviour
 {
+    MusicScript audioMScript;
+
     public bool gamePaused = false;
 
     public GameObject player;
@@ -23,6 +25,11 @@ public class ButtonS : MonoBehaviour
     bool scoreSubmitted = false;
     bool scoreRetrieved = false;
 
+    private void Awake()
+    {
+        audioMScript = GameObject.Find("AudioM").GetComponent<MusicScript>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +42,7 @@ public class ButtonS : MonoBehaviour
     {   
         if (Input.GetKeyDown("r"))
         {
-            Time.timeScale = 1f;
-            Restart();
+            RestartGame();
         }
 
         if (gamePaused)
@@ -168,18 +174,14 @@ public class ButtonS : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
-    }
-
-    public void LoadLevels()
-    {
-        SceneManager.LoadScene("Lvls");
-        Time.timeScale = 1f;
+        MusicScript.introPlayed = false;
     }
 
     public void LoadStart()
     {
         SceneManager.LoadScene("Start");
         Time.timeScale = 1f;
+        MusicScript.mainPlayed = false;
     }
 
     public void ToggleMusic()
@@ -191,16 +193,15 @@ public class ButtonS : MonoBehaviour
     void MusicOn()
     {
         musicB.GetComponent<Image>().sprite = musicOnSprite;
-        GameObject.Find("AudioM").GetComponent<MusicScript>().hajjamiPlay.volume = 0.696f;
+        audioMScript.hajjamiIntro.volume = 0.696f;
+        audioMScript.hajjamiLoop.volume = 0.696f;
         PlayerPrefs.SetInt("musicTracker", 1);
     }
     void MusicOff()
     {
         musicB.GetComponent<Image>().sprite = musicOffSprite;
-        GameObject.Find("AudioM").GetComponent<MusicScript>().hajjamiPlay.volume = 0f;
+        audioMScript.hajjamiIntro.volume = 0f;
+        audioMScript.hajjamiLoop.volume = 0f;
         PlayerPrefs.SetInt("musicTracker", 0);
     }
-
-    public void RestartAfterDeath() => Invoke("Restart", 1f);
-    void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 }

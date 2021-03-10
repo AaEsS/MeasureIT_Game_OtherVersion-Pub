@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 public class MusicScript : MonoBehaviour
 {
     public static MusicScript instance;
-    public AudioSource hajjamiMain, hajjamiPlay;
-    static bool mainPlayed = false;
-    static bool playPlayed = false;
+    public AudioSource hajjamiMain, hajjamiIntro, hajjamiLoop;
+    public static bool mainPlayed = false;
+    public static bool introPlayed = false;
 
     void Awake()
     {
@@ -22,19 +22,24 @@ public class MusicScript : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "1" && playPlayed == false)
-        {
-            hajjamiMain.Stop();
-            hajjamiPlay.Play();
-            playPlayed = true;
-            mainPlayed = false;
-        }
         if (SceneManager.GetActiveScene().name == "Start" && mainPlayed == false)
         {
-            hajjamiPlay.Stop();
+            hajjamiIntro.Stop();
+            hajjamiLoop.Stop();
+            hajjamiMain.Stop();
+
             hajjamiMain.Play();
             mainPlayed = true;
-            playPlayed = false;
+        }
+        if (SceneManager.GetActiveScene().name == "1" && introPlayed == false)
+        {
+            hajjamiIntro.Stop();
+            hajjamiLoop.Stop();
+            hajjamiMain.Stop();
+
+            hajjamiIntro.Play();
+            hajjamiLoop.PlayDelayed(hajjamiIntro.clip.length);
+            introPlayed = true;
         }
     }
 }

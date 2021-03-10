@@ -50,7 +50,7 @@ public class Powerups : MonoBehaviour
 
     public void ActivatePowerup()
     {
-        if (EventSystem.current.currentSelectedGameObject.name == "HeartPowerup(Clone)")
+        if (EventSystem.current.currentSelectedGameObject.name == "HeartPowerup(Clone)" && playerControls.healthBar.GetComponent<Slider>().value < 5)
         {
             if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[0].transform.position) playerControls.powerupBpos1 = false;
             if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[1].transform.position) playerControls.powerupBpos2 = false;

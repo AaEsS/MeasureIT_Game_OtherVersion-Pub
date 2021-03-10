@@ -3,29 +3,36 @@ using UnityEngine.UI;
 using UnityEngine.Advertisements;
 using TMPro;
 
+[RequireComponent(typeof(Button))]
 public class GameManager : MonoBehaviour, IUnityAdsListener
 {
     public GameObject player, healthBar;
     public FacePlayer facePlayer;
     public InstantiateBullet instantiateBullet;
-    public Animator gameplayeUIAnimator;
+    public Animator gameplayUIAnimator;
     public ButtonS buttonS;
-    public Button continueByAd;
     public TextMeshProUGUI continueByAdText;
     public Powerups powerupsScript;
 
+#if UNITY_ANDROID
     private string gameId = "4034219";
+#endif
+
+    Button continueByAd;
     private string rewardedVideoId = "rewardedVideo";
     public bool testMode;
 
     public bool revived = false;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Advertisement.Initialize(gameId, testMode);
+        continueByAd = GetComponent<Button>();
         continueByAd.interactable = Advertisement.IsReady(rewardedVideoId);
+
+        if (continueByAd) continueByAd.onClick.AddListener(ShowRewardedVideo);
+        
         Advertisement.AddListener(this);
+        Advertisement.Initialize(gameId, testMode);
     }
 
     // Update is called once per frame
@@ -37,9 +44,7 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
 
     public void ShowRewardedVideo()
     {
-        if (Advertisement.IsReady(rewardedVideoId))
-            Advertisement.Show(rewardedVideoId);
-        else Debug.Log("Rewarded video is not ready at the moment! Please try again later!");
+        Advertisement.Show(rewardedVideoId);
     }
 
     public void OnUnityAdsReady(string placementId)
@@ -51,20 +56,20 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
     {
         if (showResult == ShowResult.Finished)
         {
-            Advertisement.RemoveListener(this);
             Revive();
         }
         else if (showResult == ShowResult.Skipped)
         {
-            Advertisement.RemoveListener(this);
             buttonS.ShowScore();
         }
         else if (showResult == ShowResult.Failed)
         {
-            Advertisement.RemoveListener(this);
             buttonS.ShowScore();
             Debug.LogWarning("The ad failed to be shown due to an error.");
         }
+
+        Advertisement.RemoveListener(this);
+        continueByAd.onClick.RemoveListener(ShowRewardedVideo);
     }
 
     public void Revive()
@@ -76,8 +81,9 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
         foreach (GameObject powerupB in GameObject.FindGameObjectsWithTag("PowerupButton"))
             powerupB.GetComponent<Button>().interactable = true;
 
-        gameplayeUIAnimator.SetTrigger("TimeUp");
-        GameObject.Find("AudioM").GetComponent<MusicScript>().hajjamiPlay.UnPause();
+        gameplayUIAnimator.SetTrigger("TimeUp");
+
+        GameObject.Find("AudioM").GetComponent<MusicScript>().hajjamiLoop.UnPause();
 
         healthBar.GetComponent<Slider>().maxValue = 5;
         healthBar.GetComponent<Slider>().value = 5;
@@ -93,7 +99,8 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
 
     public void OnUnityAdsDidError(string message)
     {
-        // Show errors
+        Advertisement.RemoveListener(this);
+        continueByAd.onClick.RemoveListener(ShowRewardedVideo);
     }
 
     public void OnUnityAdsDidStart(string placementId)
