@@ -52,9 +52,9 @@ public class Powerups : MonoBehaviour
     {
         if (EventSystem.current.currentSelectedGameObject.name == "HeartPowerup(Clone)" && playerControls.healthBar.GetComponent<Slider>().value < 5)
         {
-            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[0].transform.position) playerControls.powerupBpos1 = false;
-            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[1].transform.position) playerControls.powerupBpos2 = false;
-            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[2].transform.position) playerControls.powerupBpos3 = false;
+            if (Vector2.Distance(EventSystem.current.currentSelectedGameObject.transform.position, playerControls.powerupsBs[0].transform.position) < 1f) playerControls.powerupBpos1 = false;
+            if (Vector2.Distance(EventSystem.current.currentSelectedGameObject.transform.position, playerControls.powerupsBs[1].transform.position) < 1f) playerControls.powerupBpos2 = false;
+            if (Vector2.Distance(EventSystem.current.currentSelectedGameObject.transform.position, playerControls.powerupsBs[2].transform.position) < 1f) playerControls.powerupBpos3 = false;
 
             playerControls.healthBar.GetComponent<Slider>().value++;
             AudioSource.PlayClipAtPoint(healSound, playerTransform.position);
@@ -65,9 +65,9 @@ public class Powerups : MonoBehaviour
 
         if (EventSystem.current.currentSelectedGameObject.name == "ShieldPowerup(Clone)" && playerControls.shielded == false && playerControls.onFire == false)
         {
-            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[0].transform.position) playerControls.powerupBpos1 = false;
-            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[1].transform.position) playerControls.powerupBpos2 = false;
-            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[2].transform.position) playerControls.powerupBpos3 = false;
+            if (Vector2.Distance(EventSystem.current.currentSelectedGameObject.transform.position, playerControls.powerupsBs[0].transform.position) < 1f) playerControls.powerupBpos1 = false;
+            if (Vector2.Distance(EventSystem.current.currentSelectedGameObject.transform.position, playerControls.powerupsBs[1].transform.position) < 1f) playerControls.powerupBpos2 = false;
+            if (Vector2.Distance(EventSystem.current.currentSelectedGameObject.transform.position, playerControls.powerupsBs[2].transform.position) < 1f) playerControls.powerupBpos3 = false;
 
             ShieldOnMethod();
             playerControls.powerupsPickupCount--;
@@ -77,9 +77,9 @@ public class Powerups : MonoBehaviour
 
         if (EventSystem.current.currentSelectedGameObject.name == "FirePowerup(Clone)" && playerControls.onFire == false && playerControls.shielded == false)
         {
-            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[0].transform.position) playerControls.powerupBpos1 = false;
-            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[1].transform.position) playerControls.powerupBpos2 = false;
-            if (EventSystem.current.currentSelectedGameObject.transform.position == playerControls.powerupsBs[2].transform.position) playerControls.powerupBpos3 = false;
+            if (Vector2.Distance(EventSystem.current.currentSelectedGameObject.transform.position, playerControls.powerupsBs[0].transform.position) < 1f) playerControls.powerupBpos1 = false;
+            if (Vector2.Distance(EventSystem.current.currentSelectedGameObject.transform.position, playerControls.powerupsBs[1].transform.position) < 1f) playerControls.powerupBpos2 = false;
+            if (Vector2.Distance(EventSystem.current.currentSelectedGameObject.transform.position, playerControls.powerupsBs[2].transform.position) < 1f) playerControls.powerupBpos3 = false;
 
             FireOnMethod();
             playerControls.powerupsPickupCount--;

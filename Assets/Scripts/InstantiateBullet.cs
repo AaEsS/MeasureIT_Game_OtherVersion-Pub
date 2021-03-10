@@ -15,6 +15,7 @@ public class InstantiateBullet : MonoBehaviour
     public int shots = 0;
 
     float timeToStart = 0;
+    bool timeToStartReached = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +27,12 @@ public class InstantiateBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timeToStart < 7.7f) timeToStart += Time.deltaTime;
-        if (timeToStart > 7.7f) CheckIfTimeToFire();
+        if (timeToStart <= 7.7f && timeToStartReached == false) timeToStart += Time.unscaledDeltaTime;
+        else
+        {
+            timeToStartReached = true;
+            CheckIfTimeToFire();
+        }
     }
 
     void CheckIfTimeToFire()

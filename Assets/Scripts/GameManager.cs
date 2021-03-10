@@ -67,9 +67,6 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
             buttonS.ShowScore();
             Debug.LogWarning("The ad failed to be shown due to an error.");
         }
-
-        Advertisement.RemoveListener(this);
-        continueByAd.onClick.RemoveListener(ShowRewardedVideo);
     }
 
     public void Revive()
@@ -95,12 +92,16 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
         Invoke("CanonFixed", 3f);
     }
 
+    void OnDestroy()
+    {
+        Advertisement.RemoveListener(this);
+    }
+
     void CanonFixed() => instantiateBullet.enabled = true;
 
     public void OnUnityAdsDidError(string message)
     {
-        Advertisement.RemoveListener(this);
-        continueByAd.onClick.RemoveListener(ShowRewardedVideo);
+        // Errors
     }
 
     public void OnUnityAdsDidStart(string placementId)

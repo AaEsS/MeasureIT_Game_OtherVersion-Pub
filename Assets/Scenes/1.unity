@@ -3211,7 +3211,7 @@ MonoBehaviour:
   buttonS: {fileID: 239089829}
   continueByAdText: {fileID: 786270579}
   powerupsScript: {fileID: 548547203}
-  testMode: 1
+  testMode: 0
   revived: 0
 --- !u!1 &1275494666
 GameObject:
