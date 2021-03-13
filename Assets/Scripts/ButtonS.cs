@@ -16,6 +16,7 @@ public class ButtonS : MonoBehaviour
     public Sprite musicOnSprite, musicOffSprite;
     public TextMeshProUGUI bestScoreText;
     public Animator gameplayeUIAnimator;
+    public Button pauseB;
 
     public InstantiateBullet instantiateBullet;
 
@@ -63,7 +64,7 @@ public class ButtonS : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (gamePaused) ResumeGame();
-            else PauseGame();
+            else if (pauseB.interactable) PauseGame();
         }
 
         if (player.GetComponent<SpriteRenderer>().enabled == false)

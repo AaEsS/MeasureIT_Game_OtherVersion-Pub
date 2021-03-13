@@ -571,12 +571,12 @@ PrefabInstance:
     - target: {fileID: 1093494123376855151, guid: ca9549121c441614ab0e882a7f08a5d1,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 238.99976
+      value: 685.99976
       objectReference: {fileID: 0}
     - target: {fileID: 1093494123376855151, guid: ca9549121c441614ab0e882a7f08a5d1,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 125
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1093494123376855151, guid: ca9549121c441614ab0e882a7f08a5d1,
         type: 3}
@@ -930,6 +930,7 @@ MonoBehaviour:
   musicOffSprite: {fileID: 21300000, guid: 5af353cccddc4614787754a4e518279c, type: 3}
   bestScoreText: {fileID: 300159071}
   gameplayeUIAnimator: {fileID: 511971264}
+  pauseB: {fileID: 5477831317055997450}
   instantiateBullet: {fileID: 6547604357818437571}
 --- !u!1 &300159069
 GameObject:
@@ -2408,12 +2409,12 @@ PrefabInstance:
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 209.1
+      value: -251.1
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 194.43018
+      value: 146.73
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}
@@ -3021,12 +3022,12 @@ PrefabInstance:
     - target: {fileID: 5240788014836771312, guid: d839571955e4d2249ae3e38a4c04451a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 170.99988
+      value: 617.9998
       objectReference: {fileID: 0}
     - target: {fileID: 5240788014836771312, guid: d839571955e4d2249ae3e38a4c04451a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 252.00009
+      value: 227.00009
       objectReference: {fileID: 0}
     - target: {fileID: 5240788014836771312, guid: d839571955e4d2249ae3e38a4c04451a,
         type: 3}
@@ -3217,6 +3218,7 @@ MonoBehaviour:
   buttonS: {fileID: 239089829}
   continueByAdText: {fileID: 786270579}
   powerupsScript: {fileID: 548547203}
+  pauseB: {fileID: 5477831317055997450}
   testMode: 0
   revived: 0
 --- !u!1 &1275494666
@@ -3522,12 +3524,12 @@ PrefabInstance:
     - target: {fileID: 759642603897833254, guid: 14696e9c80c68f640ab9c6008f18a76d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 105
+      value: 552
       objectReference: {fileID: 0}
     - target: {fileID: 759642603897833254, guid: 14696e9c80c68f640ab9c6008f18a76d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 125
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 759642603897833254, guid: 14696e9c80c68f640ab9c6008f18a76d,
         type: 3}
@@ -4442,6 +4444,11 @@ PrefabInstance:
       objectReference: {fileID: 239089823}
     - target: {fileID: 2205649457132840957, guid: 9e286692216c19a45be2c0b7606a8312,
         type: 3}
+      propertyPath: pauseB
+      value: 
+      objectReference: {fileID: 5477831317055997450}
+    - target: {fileID: 2205649457132840957, guid: 9e286692216c19a45be2c0b7606a8312,
+        type: 3}
       propertyPath: joystick
       value: 
       objectReference: {fileID: 1742905101}
@@ -4699,6 +4706,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c13280aa99fbc664d9de72791f7bec6e, type: 3}
+--- !u!114 &5477831317055997450 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5477831317201518296, guid: c13280aa99fbc664d9de72791f7bec6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5477831317055997449}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6372675306981013539
 PrefabInstance:
   m_ObjectHideFlags: 0

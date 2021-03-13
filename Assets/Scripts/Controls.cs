@@ -31,6 +31,7 @@ public class Controls : MonoBehaviour
     public bool powerupBpos1 = false;
     public bool powerupBpos2 = false;
     public bool powerupBpos3 = false;
+    public Button pauseB;
 
     public Joystick joystick;
 
@@ -92,6 +93,7 @@ public class Controls : MonoBehaviour
                         healthBar.GetComponent<HealthBarScript>().SetHealth(HP - 1);
                         audioMScript.hajjamiLoop.Pause();
                         powerupsScript.enabled = false;
+                        pauseB.interactable = false;
                     }
                     else
                     {
@@ -105,6 +107,7 @@ public class Controls : MonoBehaviour
                         healthBar.GetComponent<HealthBarScript>().SetHealth(HP - 1);
                         audioMScript.hajjamiLoop.Pause();
                         powerupsScript.enabled = false;
+                        pauseB.interactable = false;
                     }
                 }
                 else

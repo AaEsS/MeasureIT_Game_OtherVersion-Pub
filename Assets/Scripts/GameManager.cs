@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
     public ButtonS buttonS;
     public TextMeshProUGUI continueByAdText;
     public Powerups powerupsScript;
+    public Button pauseB;
 
 #if UNITY_ANDROID
     private string gameId = "4034219";
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
     void Update()
     {
         if (continueByAd.interactable) continueByAdText.SetText($"<size=%70>Continue?</size>\n<size=%40>(Ad)</size>");
-        else continueByAdText.SetText($"<size=%70>Continue?</size>\n<size=%40>(Ad)</size> <size=%30>network error</size>");
+        else continueByAdText.SetText($"<size=%70>Continue?</size>\n<size=%40>(Ad)</size> <size=%30>error</size>");
     }
 
     public void ShowRewardedVideo()
@@ -72,6 +73,8 @@ public class GameManager : MonoBehaviour, IUnityAdsListener
     public void Revive()
     {
         facePlayer.enabled = true;
+
+        pauseB.interactable = true;
 
         player.GetComponent<SpriteRenderer>().enabled = true;
         player.GetComponent<Animator>().SetBool("Reviving", true);
