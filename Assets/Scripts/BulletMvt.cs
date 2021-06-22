@@ -32,8 +32,6 @@ public class BulletMvt : MonoBehaviour
 
         blt.velocity = direction * Mathf.Max(speed, 0f);
         wallHitSound.PlayOneShot(WHSound);
-
-        if (collision.gameObject.CompareTag("Wall")) collision.gameObject.transform.GetChild(0).GetComponent<Shake>().ShakeIt(0.1f);
     }
 
     private void OnTriggerEnter2D(Collider2D trigg)
