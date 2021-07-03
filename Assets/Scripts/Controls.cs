@@ -33,8 +33,6 @@ public class Controls : MonoBehaviour
     public bool powerupBpos3 = false;
     public Button pauseB;
 
-    public Joystick joystick;
-
     public GameObject healthBar;
     public GameManager gameManager;
     public Animator gameplayeUIAnimator;
@@ -67,7 +65,6 @@ public class Controls : MonoBehaviour
             Invoke("PlayerRevived", 1f);
             deathAfterRevived = true;
         }
-        GetComponent<Rigidbody2D>().velocity = new Vector2(joystick.Horizontal, joystick.Vertical) / (Time.timeScale == 0 ? 1 : Time.timeScale) * 2.5f;
 
         if (Input.touchCount > 0)
             if (EventSystem.current.IsPointerOverGameObject() || EventSystem.current.currentSelectedGameObject != null) return;
